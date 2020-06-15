@@ -1,0 +1,183 @@
+@import url(../vendor/normalize.css);
+
+.page{
+    background-color:#000000;
+
+}
+
+
+.page__container{
+    padding-left:199px;
+    padding-right: 199px;
+    padding-top:45px;
+    padding-bottom: 60px;
+}
+
+
+
+.header {
+    max-height: 74px;
+    max-width:882px;
+    border-bottom: 1px solid #545454;
+    margin-left: auto;
+    margin-right: auto;
+
+
+}
+
+.header__logo{
+    padding-top: 0;
+    padding-left: 0;
+    padding-bottom:40px;
+   
+}
+
+.profile{
+    margin: 40px auto;
+    
+    max-width: 882px;
+    max-height: 120px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.profile__avatar{
+    max-width: 120px;
+    max-height: 120px;
+    border-radius: 50%;
+}
+
+.profile__info{
+    margin-left: 30px;;
+    max-width: 336px;
+    max-height: 77px;
+    display:flex;
+    flex-wrap: wrap;
+    align-items: center;
+  
+}
+.profile__title{
+  margin: 0;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 56px;
+  /* or 133% */
+  color: #FFFFFF;
+  text-align: end;
+  max-width:295px;
+}
+
+.profile__subtitle{
+  margin:0;
+  max-width: 318px;;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;   
+  color: #FFFFFF;
+}
+
+.profile__edit-button{
+    max-width: 24px;
+    max-height: 24px;
+    margin-left: 17px;
+
+}
+
+
+.profile__add-button{
+    margin-left: 246px;
+    max-width: 150px;
+    max-height: 50px;
+
+}
+
+.elements{
+margin-top: 45px;
+margin-right: auto;
+margin-left: auto;
+max-width: 882px;
+max-height: 744px;
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+grid-template-rows:1fr 1fr ;
+column-gap: 18px;
+row-gap: 21px;
+
+}
+
+.element{
+    
+    max-width: 282px;
+    height: 361px;
+    border-radius: 10px 10px 10px 10px;
+    background-color: #FFFFFF;
+}
+
+
+.element__image{
+    width:282px;
+    height: 282px;
+    object-fit: cover;
+    border-radius: 10px 10px 0px 0px;
+}
+
+
+.element__info{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0  0 10px 10px;
+  margin-left: 21px;
+  margin-right: 15px;
+
+
+}
+
+.element__title{
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 29px;
+    color: #000000;
+
+}
+
+
+
+.element__like-button{
+max-width: 20px;
+max-height: 18px;
+margin-right: 7px;
+
+
+}
+
+.footer{
+    max-height: 74px;
+    max-width:882px;
+   
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.copyright{
+    max-width: 318px;
+ margin:0;
+ margin-top: 66px;
+font-family: Inter;
+font-style: normal;
+font-weight: normal;
+font-size: 18px;
+line-height: 22px;
+
+color: #545454;
+
+}
