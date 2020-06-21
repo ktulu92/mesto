@@ -152,8 +152,7 @@ margin-left: 0;
 .profile__info{
     margin-left: -200px;
     max-width: 336px;
-    max-height: 77px;
-    display:flex;
+        display:flex;
     flex-wrap: wrap;
     align-items: center;
 
@@ -425,4 +424,109 @@ row-gap: 21px;
   font-size: 18px;
   line-height: 22px;
   color: #545454;
+}
+
+
+
+
+.pop-up{
+    display: none;
+    top:0;
+    left:0;
+    height: 100%;
+    width:100%;
+    position: fixed;
+    background:rgba(0,0,0,0.5);
+    align-items: center;
+    justify-content: center;
+   
+}
+
+.pop-up_close{
+    display: flex;
+
+}
+
+
+.pop-up__container{
+    background: #FFFFFF;
+    display:flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+    max-width: 430px;
+    max-height: 330px;
+    border-radius: 10px;
+    padding-top: 34px;
+    padding-bottom: 36px ;
+    
+   
+}
+
+
+.pop-up__close-button{
+    position: absolute;
+    top: -15%;
+    left: 100%;
+
+    
+}
+
+.pop-up__title{
+min-width: 360px;
+max-height: 23px;
+margin-top: 0;
+margin-left: auto;
+margin-right: auto;
+
+font-family: Inter;
+font-style: normal;
+font-weight: 900;
+font-size: 24px;
+line-height: 29px;
+
+color: #000000;
+
+
+}
+
+.pop-up__input{
+    font-family: Inter;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 17px;
+
+color: #000000;
+   
+ min-width: 83%;
+margin-top: 30px;
+margin-left: auto;
+margin-right: auto;
+border: none;
+
+border-bottom: 1px solid #000000;
+;
+    
+
+}
+
+
+.pop-up__submit-button{
+margin-top: 48px;
+min-width: 83%;
+min-height: 50px;
+margin-left: auto;
+margin-right: auto;
+color: #FFFFFF;
+font-family: Inter;
+font-style: normal;
+font-weight: normal;
+font-size: 18px;
+line-height: 22px;
+text-align: center;
+
+background: #000000;
+border-radius: 2px;
+
 }
