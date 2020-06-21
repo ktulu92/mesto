@@ -1,0 +1,14 @@
+.pop-up__close-button{
+    position: absolute;
+    top: -15%;
+    left: 100%;   
+  }
+  
+  
+  @media (min-width:320px) and (max-width:600px){
+    .pop-up__close-button{
+      position: absolute;
+      top: -20%;
+      left: 80%;
+  }
+  }

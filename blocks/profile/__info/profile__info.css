@@ -1,0 +1,26 @@
+.profile__info{
+    margin-left: -200px;
+    max-width: 336px;
+    display:flex;
+    flex-wrap: wrap;
+    align-items: center;  
+  }
+  
+    
+  @media  (min-width:320px) and (max-width:600px){
+    .profile__info{
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 36px;  
+  }
+  }
+  
+  @media  (min-width:601px) and (max-width:1024px){
+    .profile__info{
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 36px;
+      max-width: 230px;
+      font-size: 42px;        
+  }
+  }
