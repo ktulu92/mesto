@@ -22,8 +22,8 @@
       /* or 207% */ 
       text-align: center;   
       color: #FFFFFF;
-      margin-right: auto;
       margin-left: auto;
+      max-width: 190px;
   }
   }
 
