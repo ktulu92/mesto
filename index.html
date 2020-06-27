@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, width=device-width">
+    <link rel="stylesheet" type="text/css" href="./pages/index.css">
+    <title>Mesto</title>
+  </head>
+<body class="page">
+  <div class="page__container">
+
+    <header class="header">
+      <div class="header__logo"></div>
+    </header>
+    
+  <main class="content">
+
+    <section class="profile">
+      <img class="profile__avatar" src="./images/kusto.png" alt="Аватар" >
+      <div class="profile__info">
+        <h1 class="profile__title">Жак-Ив Кусто</h1>
+        <button class="profile__edit-button" ></button>
+        <p class="profile__subtitle">Исследователь океана</p>
+      </div>
+      <button class="profile__add-button" ></button>
+    </section>
+
+    <section class="elements">
+      <div class="element">
+        <img class="element__image" src="./images/Бали.jpg" alt="Бали">
+        <div class="element__info">
+          <h2 class="element__title">Бали</h2>
+          <button class="element__like-button"></button>
+        </div> 
+      </div>
+
+      <div class="element">
+        <img class="element__image" src="./images/Кения.jpg" alt="Кения">
+        <div class="element__info">
+          <h2 class="element__title">Кения</h2>
+          <button class="element__like-button"></button>
+        </div> 
+      </div>
+
+     <div class="element">
+       <img class="element__image" src="./images/Лиссабон.jpg" alt="Лиссабон">
+       <div class="element__info">
+         <h2 class="element__title">Лиссабон</h2>
+         <button class="element__like-button"></button>
+        </div> 
+       </div>
+
+     <div class="element">
+       <img class="element__image" src="./images/Невада.jpg" alt="Невада">
+       <div class="element__info">
+         <h2 class="element__title">Невада</h2>
+         <button class="element__like-button"></button>
+        </div> 
+      </div>
+
+     <div class="element">
+        <img class="element__image" src="./images/Сиракузы.jpg" alt="Сиракузы">
+        <div class="element__info">
+          <h2 class="element__title">Сиракузы</h2>
+          <button class="element__like-button"></button>
+         </div> 
+      </div>
+
+     <div class="element">
+        <img class="element__image" src="./images/Стокгольм.jpg" alt="Стокгольм">
+        <div class="element__info">
+          <h2 class="element__title">Стокгольм</h2>
+          <button class="element__like-button"></button>
+        </div> 
+      </div>    
+   </section>
+  </main>
+
+  <footer class="footer">
+    <p class="footer__copyright">&COPY; 2020 Mesto Russia</p>   
+  </footer>
+
+
+  <section class="pop-up">
+    <form class="pop-up__container">
+      
+        <h2 class="pop-up__title">Редактировать профиль</h2>
+        <button class="pop-up__close-button" ></button>       
+        <input class="pop-up__input pop-up__input_type_name" value="Жак-Ив Кусто">
+        <input class="pop-up__input pop-up__input_type_description" value="Исследователь океана">
+        <button class="pop-up__submit-button" name="Сохранить" type="submit">Сохранить</button>
+      
+  </section>
+
+  </div>  
+  <script src="./scripts/script.js"></script>
+  </body>
+
+  </html>
