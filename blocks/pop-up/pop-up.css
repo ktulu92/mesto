@@ -5,10 +5,12 @@
 @import url(./__title/pop-up__title.css);
 @import url(./_type/pop-up_type_image.css);
 @import url(./__container/_type/pop-up_container_type_image.css);
+@import url(./__image-title/pop-up__image-title.css);
+@import url(./__image-close-button/pop-up__image-close-button.css);
 
 
 .pop-up{
-    display: none;
+    display: flex;
     top:0;
     left:0;
     height: 100%;
@@ -17,6 +19,10 @@
     background:rgba(0,0,0,0.5);
     align-items: center;
     justify-content: center; 
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear;
+
   }
 
 
