@@ -1,0 +1,64 @@
+.pop-up_type_image{
+    display: none;
+    top:0;
+    left:0;
+    height: 100%;
+    width:100%;
+    position: fixed;
+    background:rgba(0,0,0,0.5);
+    align-items: center;
+    justify-content: center; 
+  }
+
+
+
+
+
+  .pop-up__image-close-button{
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    border: none;
+    object-position: center;
+    object-fit: none;
+    top: 7%;
+    left: 87%;
+    background: url(../../../images/close-icon.svg);
+    
+    
+  }
+
+  .pop-up__image-close-button:hover{
+opacity: 0.6;
+  }
+  
+  
+  @media (min-width:320px) and (max-width:600px){
+    .pop-up__image-close-button{
+    top: 27%;
+    left: 84%;
+  }}
+
+.pop-up__image-title{
+  position: absolute;
+  width: 291px;
+  height: 12px;
+  left: 13%;
+  top: 87%;  
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;   
+  color: #FFFFFF;
+}
+ 
+@media (min-width:320px) and (max-width:600px){
+  .pop-up__image-title{
+    position: absolute;
+    width: 240px;
+   
+    left: 13%;
+    top: 66%;
+}}
+    

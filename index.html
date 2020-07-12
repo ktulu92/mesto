@@ -22,58 +22,12 @@
         <button class="profile__edit-button" ></button>
         <p class="profile__subtitle">Исследователь океана</p>
       </div>
-      <button class="profile__add-button" ></button>
+      <button class= "profile__add-button"></button>
     </section>
 
-    <section class="elements">
-      <div class="element">
-        <img class="element__image" src="./images/Бали.jpg" alt="Бали">
-        <div class="element__info">
-          <h2 class="element__title">Бали</h2>
-          <button class="element__like-button"></button>
-        </div> 
-      </div>
-
-      <div class="element">
-        <img class="element__image" src="./images/Кения.jpg" alt="Кения">
-        <div class="element__info">
-          <h2 class="element__title">Кения</h2>
-          <button class="element__like-button"></button>
-        </div> 
-      </div>
-
-     <div class="element">
-       <img class="element__image" src="./images/Лиссабон.jpg" alt="Лиссабон">
-       <div class="element__info">
-         <h2 class="element__title">Лиссабон</h2>
-         <button class="element__like-button"></button>
-        </div> 
-       </div>
-
-     <div class="element">
-       <img class="element__image" src="./images/Невада.jpg" alt="Невада">
-       <div class="element__info">
-         <h2 class="element__title">Невада</h2>
-         <button class="element__like-button"></button>
-        </div> 
-      </div>
-
-     <div class="element">
-        <img class="element__image" src="./images/Сиракузы.jpg" alt="Сиракузы">
-        <div class="element__info">
-          <h2 class="element__title">Сиракузы</h2>
-          <button class="element__like-button"></button>
-         </div> 
-      </div>
-
-     <div class="element">
-        <img class="element__image" src="./images/Стокгольм.jpg" alt="Стокгольм">
-        <div class="element__info">
-          <h2 class="element__title">Стокгольм</h2>
-          <button class="element__like-button"></button>
-        </div> 
-      </div>    
-   </section>
+    <ul class="elements">   
+     
+    </ul>
   </main>
 
   <footer class="footer">
@@ -81,17 +35,59 @@
   </footer>
 
 
-  <section class="pop-up">
+  <section class="pop-up pop-up-profile">
     <form class="pop-up__container">      
       <h2 class="pop-up__title">Редактировать профиль</h2>
-      <button class="pop-up__close-button" ></button>       
+      <button class="pop-up__close-button pop-up__profile-close-button" ></button>       
       <input class="pop-up__input pop-up__input_type_name" value="Жак-Ив Кусто">
       <input class="pop-up__input pop-up__input_type_description" value="Исследователь океана">
-      <button class="pop-up__submit-button" name="Сохранить" type="submit">Сохранить</button>
+      <button class="pop-up__submit-button pop-up__profile-submit-button" name="Сохранить" type="submit">Сохранить</button>
     </form>      
   </section>
 
+
+  <section class=" pop-up pop-up-place" >
+    <form class="pop-up__container pop-up__form_type_add-card">      
+      <h2 class="pop-up__title">Новое место</h2>
+      <button class="pop-up__close-button pop-up__place-close-button" ></button>       
+      <input class="pop-up__input pop-up__input_type_name " value="Название">
+      <input class="pop-up__input pop-up__input_type_image-link"  value ="Ссылка на картинку">
+      <button class="pop-up__submit-button pop-up__place-submit-button" name="Сохранить" type="submit">Сохранить</button>
+    </form>      
+  </section>
+
+
+  <section class="pop-up_type_image">
+    <img class="pop-up_container_type_image">      
+      <button class="pop-up__image-close-button" ></button>
+     
+     <h4 class="pop-up__image-title">Здесь будет подпись фото</h4>        
+  </section>
   </div>  
+
+  <template class="template-element">
+    <li class="element">
+    <button class="element__delete-button"></button>
+    <img class="element__image" src="" alt = "">
+    <div class="element__info">
+      <h2 class="element__title"></h2>
+      <button class="element__like-button"></button>
+    </div> 
+  </li>
+  </template>    
+
+
+
+
+
+
+
+
+
+
+
+
+
   <script src="./scripts/script.js"></script>
   </body>
 

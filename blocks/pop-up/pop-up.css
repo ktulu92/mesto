@@ -3,7 +3,8 @@
 @import url(./__input/pop-up__input.css);
 @import url(./__submit-button/pop-up__submit-button.css);
 @import url(./__title/pop-up__title.css);
-
+@import url(./_type/pop-up_type_image.css);
+@import url(./__container/_type/pop-up_container_type_image.css);
 
 
 .pop-up{
@@ -17,3 +18,5 @@
     align-items: center;
     justify-content: center; 
   }
+
+
