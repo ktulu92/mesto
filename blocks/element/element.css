@@ -9,14 +9,13 @@
   position: relative;
     margin-left:0;
     margin-right: 0;
-    max-width: 282px;
+    min-width: 282px;
     height: 361px;
     border-radius: 10px 10px 10px 10px;
     background-color: #FFFFFF;
     list-style-type: none
   }
-  
-  
+    
   @media (max-width:768px){
     .element{
       margin-left:auto;

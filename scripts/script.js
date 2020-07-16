@@ -39,13 +39,18 @@ const inputLink = addElementForm.querySelector(".pop-up__input_type_image-link")
 
 
 function createCard(card){                                                    //функция сборки карточки
-  const cardElement = elementTemplate.content.cloneNode(true);
+  const cardElement = elementTemplate.content.cloneNode(true);    
+  const likeButton = cardElement.querySelector(".element__like-button")
+  const deleteButton = cardElement.querySelector(".element__delete-button")
+  
+
+  
 
 
   cardElement.querySelector(".element__title").textContent = card.name;
   cardElement.querySelector(".element__image").src = card.link;
-  const likeButton = cardElement.querySelector(".element__like-button")
-  const deleteButton = cardElement.querySelector(".element__delete-button")
+  cardElement.querySelector(".element__image").alt = card.name;
+
   
   const deleteCard = (event)=> {                                                     //функция удаления карточки
     element = event.target.closest(".element")
@@ -61,60 +66,41 @@ function createCard(card){                                                    //
   likeButton.addEventListener("click", toggleLike);                                 //добавляем событие лайк и удаление
   deleteButton.addEventListener("click", deleteCard);   
 
-  return cardElement //возвращаем карточек с данными       
+  return cardElement //возвращаем карточек с данными   
+  
 }
 
 function addCard (item){
   listCards.prepend(createCard(item)) 
+  const card =document.querySelector(".element");
+  const popupImage =  document.querySelector(".pop-up_type_image");
+ 
+  const image =  document.querySelector(".pop-up_container_type_image")
+  const imageTitle = document.querySelector(".pop-up__image-title")
+  
+  
+  const popupImageCloseButton = document.querySelector(".pop-up__image-close-button"); //попап галерея 
+  const popupImageOpenButton = document.querySelector(".element__image");
+   
+  
+  popupImageOpenButton.addEventListener('click',  event=>{ // обработчик события открытия галереи
+  event.preventDefault()
+  
+  image.src = popupImageOpenButton.src
+  imageTitle.textContent = popupImageOpenButton.alt
+  popupOpen(popupImage);
+  })
+
+  popupImageCloseButton.addEventListener('click',  event=>{// обработчик события закрытия 
+  event.preventDefault()
+  
+  popupClose(popupImage);
+})
 }
 
 initialCards.forEach(addCard) // рендерим и добавляем карточки из массива
 
 
-
-
-
-
-
-const popupImage =  document.querySelector(".pop-up_type_image");
-const image =  document.querySelector(".pop-up_container_type_image")
-const imageTitle = document.querySelector(".pop-up__image-title")
-
- 
-
-
-
-
-const popupImageCloseButton = document.querySelector(".pop-up__image-close-button"); //попап галерея
-const popupImageOpenButton = document.querySelector(".element__image");
-  
- popupImageOpenButton.addEventListener("click",  event=>{ // обработчик события открытия галереи
-  event.preventDefault()
-  image.src = card.link
-  image.alt - card.name
-  imageTitle.textContent = card.name
-  popupOpen(popupImage);
-})
-
-popupImageCloseButton.addEventListener("click",  event=>{// обработчик события закрытия 
-  event.preventDefault()   
-  popupClose(popupImage);  
-})
- 
-
-//форма добавления карточки и обработчик события
-addElementForm.addEventListener("submit", event=>{
-  event.preventDefault()
-  
-  let newCard = {
-  name : inputName.value,
-  link : inputLink.value
-  }
-  
-  addCard(newCard);
-  
-  popupClose(popupPlace);
-})
 
 
 
@@ -140,6 +126,27 @@ let profileSubtitle = document.querySelector(".profile__subtitle");  // Нашл
 
 let newProfileTitle = popupProfile.querySelector(".pop-up__input_type_name");
 let newProfileDescription = popupProfile.querySelector(".pop-up__input_type_description");
+
+//форма добавления карточки и обработчик события
+addElementForm.addEventListener("submit", event => {
+  event.preventDefault()
+
+  
+  const newCard = {
+  name : inputName.value,
+  link : inputLink.value
+  }
+  
+  addCard(newCard);
+  
+  popupClose(popupPlace);
+})
+
+
+
+
+
+
 
 
 
@@ -194,11 +201,5 @@ formElement.addEventListener("submit", event=>{                 //Обработ
   profileSubtitle.textContent = newProfileDescription.value;
   popupClose(popupProfile)
 });
-
-
-
-
-
-
 
 
