@@ -104,6 +104,11 @@ initialCards.forEach(addCard) // рендерим и добавляем карт
 
 
 
+
+
+
+
+
 // объявляем переменные попапов и кнопок которые их закрывают и открывают
 const popupProfile = document.querySelector(".pop-up-profile");                  
 const popupPlace = document.querySelector(".pop-up-place");
@@ -128,23 +133,6 @@ let newProfileTitle = popupProfile.querySelector(".pop-up__input_type_name");
 let newProfileDescription = popupProfile.querySelector(".pop-up__input_type_description");
 
 //форма добавления карточки и обработчик события
-addElementForm.addEventListener("submit", event => {
-  event.preventDefault()
-
-  
-  const newCard = {
-  name : inputName.value,
-  link : inputLink.value
-  }
-  
-  addCard(newCard);
-  
-  popupClose(popupPlace);
-})
-
-
-
-
 
 
 
@@ -177,6 +165,38 @@ popupProfileCloseButton.addEventListener("click", event=>{ //обработчи�
 
   popupClose(popupProfile);
 })
+let formElement = document.querySelector(".pop-up__container"); //форма для редактирования профиля
+
+formElement.addEventListener("submit", event=>{                 //Обработчик события редактирования имени и профессии и закрытие формы редактирования профиля
+  event.preventDefault(); 
+  profileTitle.textContent = newProfileTitle.value;
+  profileSubtitle.textContent = newProfileDescription.value;
+  popupClose(popupProfile)
+});
+
+
+
+
+
+addElementForm.addEventListener("submit", event => {
+  console.log(event)
+  event.preventDefault()
+  
+
+  
+  const newCard = {
+  name : inputName.value,
+  link : inputLink.value
+  }
+  
+  addCard(newCard);
+  console.log(newCard)
+  
+  popupClose(popupPlace);
+})
+
+
+
 
 
 
@@ -191,15 +211,4 @@ popupPlaceCloseButton.addEventListener("click",  event=>{// обработчик
   
   popupClose(popupPlace);
 })
-
-
-let formElement = document.querySelector(".pop-up__container"); //форма для редактирования профиля
-
-formElement.addEventListener("submit", event=>{                 //Обработчик события редактирования имени и профессии и закрытие формы редактирования профиля
-  event.preventDefault(); 
-  profileTitle.textContent = newProfileTitle.value;
-  profileSubtitle.textContent = newProfileDescription.value;
-  popupClose(popupProfile)
-});
-
 
