@@ -38,6 +38,10 @@ const image =  document.querySelector(".pop-up_container_type_image")
 const imageTitle = document.querySelector(".pop-up__image-title")
 const popupImageCloseButton = document.querySelector(".pop-up__image-close-button"); //попап галерея 
 
+const popupProfileOverlay = document.querySelector(".pop-up__overlay_type_profile");
+const popupPlaceOverlay = document.querySelector(".pop-up__overlay_type_place");
+const popupImageOverlay = document.querySelector(".pop-up__overlay_type_image");
+
 
     
 
@@ -51,6 +55,7 @@ const popupOpen = function(popup){
 const popupClose = function(popup){
   popup.classList.remove("pop-up_opened");
 }
+
 
 
 
@@ -73,12 +78,12 @@ function createCard(card){                                                    //
   cardElement.querySelector(".element__image").alt = card.name;
 
   const deleteCard = (event)=> {                                                     //функция удаления карточки
-    element = event.target.closest(".element")
+   const element = event.target.closest(".element")
     element.remove()
   }
   
   const toggleLike = (event) => {                                                      //функция постановки лайка
-    element =  event.target.closest(".element");
+    
     likeButton.classList.toggle("element__like-button_clicked")  
   }
     
@@ -163,7 +168,7 @@ addElementForm.addEventListener("submit", event => {
 
 
 popupPlaceCloseButton.addEventListener("click",  event=>{// обработчик события закрытия места
-
+  
   popupClose(popupPlace);
 })
 
@@ -173,5 +178,43 @@ popupPlaceCloseButton.addEventListener("click",  event=>{// обработчик
 popupPlaceOpenButton.addEventListener("click",  event=>{ // обработчик события открытия и добавления новой карточки места
   popupOpen(popupPlace);
 })
+
+
+
+popupProfileOverlay.onkeydown = function( event ) {
+  if ( event.keyCode == 27 ) {
+    popupClose(popupProfile)
+  }
+};
+
+popupPlaceOverlay.onkeydown = function( event ) {
+  if ( event.keyCode == 27 ) {
+    popupClose(popupPlace)
+  }
+};
+
+
+
+//закрытие попапов по клику на оверлей
+
+popupProfileOverlay.addEventListener("click", event=>{ 
+  
+  popupClose(popupProfile)
+});
+
+
+popupPlaceOverlay.addEventListener("click", event=>{ 
+  popupClose(popupPlace)
+});
+
+popupImageOverlay.addEventListener("click", event=>{ 
+  
+  
+  popupClose(popupImage)
+});
+
+
+
+
 
 
