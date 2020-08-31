@@ -173,12 +173,9 @@ popupPlaceCloseButton.addEventListener("click",  event=>{// обработчик
 })
 
 
-
-
 popupPlaceOpenButton.addEventListener("click",  event=>{ // обработчик события открытия и добавления новой карточки места
   popupOpen(popupPlace);
 })
-
 
 
 popupProfileOverlay.onkeydown = function( event ) {
@@ -197,8 +194,7 @@ popupPlaceOverlay.onkeydown = function( event ) {
 
 //закрытие попапов по клику на оверлей
 
-popupProfileOverlay.addEventListener("click", event=>{ 
-  
+popupProfileOverlay.addEventListener("click", event=>{   
   popupClose(popupProfile)
 });
 
@@ -207,14 +203,29 @@ popupPlaceOverlay.addEventListener("click", event=>{
   popupClose(popupPlace)
 });
 
-popupImageOverlay.addEventListener("click", event=>{ 
-  
-  
+popupImageOverlay.addEventListener("click", event=>{  
   popupClose(popupImage)
 });
 
 
+//закрытие попапов по нажатию esc
+
+document.addEventListener('keydown',e=>{ 
+  if (e.which === '27'){
+  popupClose(popupProfile)  }
+})
 
 
+document.addEventListener('keydown',e=>{ 
+  if (e.which === 27){
+  popupClose(popupPlace)  }
+})
 
 
+document.addEventListener('keydown',e=>{ 
+  if (e.which === 27){
+  popupClose(popupImage)}  
+})
+
+
+  
