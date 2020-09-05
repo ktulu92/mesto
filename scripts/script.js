@@ -48,12 +48,12 @@ const popupImageOverlay = document.querySelector(".pop-up__overlay_type_image");
 const popups = Array.from(document.querySelectorAll(".pop-up"));
 
 //функция Открытие попапа
-const popupOpen = function (popup) {
+const openPopup = function (popup) {
   popup.classList.add("pop-up_opened");
 
   const handlePopupClose = (event) => {
     if (event.which === 27) {
-      popupClose(popup);
+     closePopup(popup);
       document.removeEventListener("keydown", handlePopupClose);
     }
   };
@@ -62,7 +62,7 @@ const popupOpen = function (popup) {
 };
 
 //функция Закрытие попапа
-const popupClose = function (popup) {
+const closePopup = function (popup) {
   popup.classList.remove("pop-up_opened");
 };
 
@@ -77,7 +77,7 @@ function createCard(card) {
     // обработчик события открытия галереи
     image.src = popupImageOpenButton.src;
     imageTitle.textContent = popupImageOpenButton.alt;
-    popupOpen(popupImage);
+    openPopup(popupImage);
   });
 
   cardElement.querySelector(".element__title").textContent = card.name;
@@ -109,7 +109,7 @@ function addCard(item) {
 initialCards.forEach(addCard); // рендерим и добавляем карточки из массива
 popupImageCloseButton.addEventListener("click", (event) => {
   // обработчик события закрытия
-  popupClose(popupImage);
+  closePopup(popupImage);
 });
 
 // объявляем переменные попапов и кнопок которые их закрывают и открывают
@@ -137,14 +137,15 @@ const newProfileDescription = popupProfile.querySelector(
 
 popupProfileCloseButton.addEventListener("click", (event) => {
   //обработчик события  закрытие редактирования профиля
-  popupClose(popupProfile);
+  closePopup(popupProfile);
 });
 
 popupProfileOpenButton.addEventListener("click", (event) => {
   //обработчик события открытия и редактирования профиля
   newProfileTitle.placeholder = profileTitle.textContent;
   newProfileDescription.placeholder = profileSubtitle.textContent;
-  popupOpen(popupProfile);
+  openPopup(popupProfile);
+ 
 });
 
 const formElement = document.querySelector(".pop-up__container"); //форма для редактирования профиля
@@ -153,7 +154,7 @@ formElement.addEventListener("submit", (event) => {
   event.preventDefault();
   profileTitle.textContent = newProfileTitle.value;
   profileSubtitle.textContent = newProfileDescription.value;
-  popupClose(popupProfile);
+  closePopup(popupProfile);
 });
 
 addElementForm.addEventListener("submit", (event) => {
@@ -164,44 +165,46 @@ addElementForm.addEventListener("submit", (event) => {
     link: inputLink.value,
   };
   addCard(newCard);
-  popupClose(popupPlace);
+  closePopup(popupPlace);
 });
 
 popupPlaceCloseButton.addEventListener("click", (event) => {
   // обработчик события закрытия места
 
-  popupClose(popupPlace);
+  closePopup(popupPlace);
 });
 
 popupPlaceOpenButton.addEventListener("click", (event) => {
   // обработчик события открытия и добавления новой карточки места
-  popupOpen(popupPlace);
+  addElementForm.reset()
+  openPopup(popupPlace);
+
 });
 
 popupProfileOverlay.onkeydown = function (event) {
   if (event.keyCode == 27) {
-    popupClose(popupProfile);
+    closePopup(popupProfile);
   }
 };
 
 popupPlaceOverlay.onkeydown = function (event) {
   if (event.keyCode == 27) {
-    popupClose(popupPlace);
+    closePopup(popupPlace);
   }
 };
 
 //закрытие попапов по клику на оверлей
 
 popupProfileOverlay.addEventListener("click", (event) => {
-  popupClose(popupProfile);
+  closePopup(popupProfile);
 });
 
 popupPlaceOverlay.addEventListener("click", (event) => {
-  popupClose(popupPlace);
+  closePopup(popupPlace);
 });
 
 popupImageOverlay.addEventListener("click", (event) => {
-  popupClose(popupImage);
+  closePopup(popupImage);
 });
 
 //закрытие попапов по нажатию esc
