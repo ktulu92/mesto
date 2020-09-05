@@ -46,6 +46,7 @@ const popupPlaceOverlay = document.querySelector(".pop-up__overlay_type_place");
 const popupImageOverlay = document.querySelector(".pop-up__overlay_type_image");
 
 const popups = Array.from(document.querySelectorAll(".pop-up"));
+const popupPlaceSubmitButton = document.querySelector(".pop-up__place-submit-button")
 
 //функция Открытие попапа
 const openPopup = function (popup) {
@@ -104,6 +105,7 @@ function createCard(card) {
 function addCard(item) {
   //Добавляем карточки
   listCards.prepend(createCard(item));
+  
 }
 
 initialCards.forEach(addCard); // рендерим и добавляем карточки из массива
@@ -165,6 +167,7 @@ addElementForm.addEventListener("submit", (event) => {
     link: inputLink.value,
   };
   addCard(newCard);
+  
   closePopup(popupPlace);
 });
 
@@ -176,8 +179,13 @@ popupPlaceCloseButton.addEventListener("click", (event) => {
 
 popupPlaceOpenButton.addEventListener("click", (event) => {
   // обработчик события открытия и добавления новой карточки места
+  popupPlaceSubmitButton.classList.add("pop-up__submit-button_type_disabled")
   addElementForm.reset()
+ 
+
   openPopup(popupPlace);
+  
+  
 
 });
 
