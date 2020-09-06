@@ -1,4 +1,3 @@
-
 const validationData = {
   formSelector: ".pop-up__container",
   inputSelector: ".pop-up__input",
@@ -7,7 +6,6 @@ const validationData = {
   inputErrorClass: "pop-up__input_type_error",
   errorClass: "pop-up__error_element_type_active",
 };
-
 
 const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
@@ -32,27 +30,34 @@ const checkInputValidity = (formElement, inputElement) => {
 };
 
 const setEventListeners = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll(validationData.inputSelector));
-  const buttonElement = formElement.querySelector(validationData.submitButtonSelector);
-  toggleButtonState(inputList, buttonElement,validationData.inactiveButtonClass);
+  const inputList = Array.from(
+    formElement.querySelectorAll(validationData.inputSelector)
+  );
+  const buttonElement = formElement.querySelector(
+    validationData.submitButtonSelector
+  );
+  toggleButtonState(
+    inputList,
+    buttonElement,
+    validationData.inactiveButtonClass
+  );
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", function () {
       checkInputValidity(formElement, inputElement);
-      toggleButtonState(inputList, buttonElement,validationData.inactiveButtonClass);
+      toggleButtonState(
+        inputList,
+        buttonElement,
+        validationData.inactiveButtonClass
+      );
     });
   });
 };
 
-
-
-
-
-
 const enableValidation = (validationData) => {
-  
- 
-  const formList = Array.from(document.querySelectorAll(validationData.formSelector));
+  const formList = Array.from(
+    document.querySelectorAll(validationData.formSelector)
+  );
   formList.forEach((formElement) => {
     setEventListeners(formElement);
 
@@ -60,10 +65,7 @@ const enableValidation = (validationData) => {
       evt.preventDefault();
     });
   });
-
-
 };
-
 
 function hasInvalidInput(inputList) {
   return inputList.some((inputElement) => {
@@ -71,11 +73,9 @@ function hasInvalidInput(inputList) {
   });
 }
 
-
 enableValidation(validationData);
 
-
-function toggleButtonState(inputList, buttonElement,) {
+function toggleButtonState(inputList, buttonElement) {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(validationData.inactiveButtonClass);
   } else {

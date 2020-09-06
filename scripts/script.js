@@ -45,7 +45,7 @@ const popupProfileOverlay = document.querySelector(
 const popupPlaceOverlay = document.querySelector(".pop-up__overlay_type_place");
 const popupImageOverlay = document.querySelector(".pop-up__overlay_type_image");
 
-const popups = Array.from(document.querySelectorAll(".pop-up"));
+
 const popupPlaceSubmitButton = document.querySelector(".pop-up__place-submit-button")
 
 //функция Открытие попапа
@@ -74,7 +74,7 @@ function createCard(card) {
   const deleteButton = cardElement.querySelector(".element__delete-button");
   const popupImageOpenButton = cardElement.querySelector(".element__image");
 
-  popupImageOpenButton.addEventListener("click", (event) => {
+  popupImageOpenButton.addEventListener("click", () => {
     // обработчик события открытия галереи
     image.src = popupImageOpenButton.src;
     imageTitle.textContent = popupImageOpenButton.alt;
@@ -91,7 +91,7 @@ function createCard(card) {
     element.remove();
   };
 
-  const toggleLike = (event) => {
+  const toggleLike = () => {
     //функция постановки лайка
 
     likeButton.classList.toggle("element__like-button_clicked");
@@ -109,7 +109,7 @@ function addCard(item) {
 }
 
 initialCards.forEach(addCard); // рендерим и добавляем карточки из массива
-popupImageCloseButton.addEventListener("click", (event) => {
+popupImageCloseButton.addEventListener("click", () => {
   // обработчик события закрытия
   closePopup(popupImage);
 });
@@ -137,12 +137,12 @@ const newProfileDescription = popupProfile.querySelector(
 
 //форма добавления карточки и обработчик события
 
-popupProfileCloseButton.addEventListener("click", (event) => {
+popupProfileCloseButton.addEventListener("click", () => {
   //обработчик события  закрытие редактирования профиля
   closePopup(popupProfile);
 });
 
-popupProfileOpenButton.addEventListener("click", (event) => {
+popupProfileOpenButton.addEventListener("click", () => {
   //обработчик события открытия и редактирования профиля
   newProfileTitle.placeholder = profileTitle.textContent;
   newProfileDescription.placeholder = profileSubtitle.textContent;
@@ -203,15 +203,15 @@ popupPlaceOverlay.onkeydown = function (event) {
 
 //закрытие попапов по клику на оверлей
 
-popupProfileOverlay.addEventListener("click", (event) => {
+popupProfileOverlay.addEventListener("click", () => {
   closePopup(popupProfile);
 });
 
-popupPlaceOverlay.addEventListener("click", (event) => {
+popupPlaceOverlay.addEventListener("click", () => {
   closePopup(popupPlace);
 });
 
-popupImageOverlay.addEventListener("click", (event) => {
+popupImageOverlay.addEventListener("click", () => {
   closePopup(popupImage);
 });
 
