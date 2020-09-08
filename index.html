@@ -16,9 +16,15 @@
         <section class="profile">
           <img class="profile__avatar" src="./images/kusto.png" alt="Аватар" />
           <div class="profile__info">
-            <h1 class="profile__title">Жак-Ив Кусто</h1>
+            <div class="profile__name-container">
+              <h1 class="profile__title">
+                Жак-Ив Кусто
+              </h1>
+              <p class="profile__subtitle">
+               Исследователь океана
+              </p>
+            </div>
             <button class="profile__edit-button"></button>
-            <p class="profile__subtitle">Исследователь океана</p>
           </div>
           <button class="profile__add-button"></button>
         </section>
@@ -50,9 +56,12 @@
               required
               minlength="2"
               maxlength="40"
-              id="pop-up__input_type_name"
+              id=" pop-up__input_type_name"
             />
-            <span class="pop-up__error" id="pop-up__input_type_name-error"></span>
+            <span
+              class="pop-up__error"
+              id="pop-up__input_type_name-error"
+            ></span>
           </div>
           <div class="pop-up__field pop-up__field_type_description">
             <input
@@ -63,7 +72,11 @@
               maxlength="200"
               id="pop-up__input_type_description"
             />
-            <span class="pop-up__error" id="pop-up__input_type_description-error"> </span>
+            <span
+              class="pop-up__error"
+              id="pop-up__input_type_description-error"
+            >
+            </span>
           </div>
 
           <button
@@ -93,7 +106,10 @@
               maxlength="30"
               id="pop-up__input_type_name"
             />
-            <span class="pop-up__error" id="pop-up__input_type_name-error"></span>
+            <span
+              class="pop-up__error"
+              id="pop-up__input_type_name-error"
+            ></span>
           </div>
           <div class="pop-up__field pop-up__field_type_link">
             <input
@@ -103,7 +119,10 @@
               required
               id="pop-up__input_type_image-link"
             />
-            <span class="pop-up__error" id="pop-up__input_type_image-link-error"></span>
+            <span
+              class="pop-up__error"
+              id="pop-up__input_type_image-link-error"
+            ></span>
           </div>
           <button
             class="pop-up__submit-button pop-up__place-submit-button"
