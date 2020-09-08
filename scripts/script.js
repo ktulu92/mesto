@@ -47,6 +47,7 @@ const popupImageOverlay = document.querySelector(".pop-up__overlay_type_image");
 
 
 const popupPlaceSubmitButton = document.querySelector(".pop-up__place-submit-button")
+const popupProfileSubmitButton =  document.querySelector(".pop-up__profile-submit-button")
 
 //функция Открытие попапа
 const openPopup = function (popup) {
@@ -144,9 +145,13 @@ popupProfileCloseButton.addEventListener("click", () => {
 
 popupProfileOpenButton.addEventListener("click", () => {
   //обработчик события открытия и редактирования профиля
-  newProfileTitle.placeholder = profileTitle.textContent;
-  newProfileDescription.placeholder = profileSubtitle.textContent;
+  newProfileTitle.value = profileTitle.textContent;
+  newProfileDescription.value = profileSubtitle.textContent;
+  popupProfileSubmitButton.classList.remove("pop-up__submit-button_type_disabled")
+
+
   openPopup(popupProfile);
+
  
 });
 
