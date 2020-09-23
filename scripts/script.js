@@ -90,7 +90,7 @@ const closePopup = function (popup) {
 //   // const cardElement = elementTemplate.content.cloneNode(true);
 //   // const likeButton = cardElement.querySelector(".element__like-button");
 //   // const deleteButton = cardElement.querySelector(".element__delete-button");
-//   // // const popupImageOpenButton = cardElement.querySelector(".element__image");
+  const popupImageOpenButton = document.querySelector(".element__image");
 
 // popupImageOpenButton.addEventListener("click", () => {
 //   // обработчик события открытия галереи
@@ -161,6 +161,12 @@ addElementForm.addEventListener("submit", (event) => {
     link: inputLink.value,
   };
   new Card(userCard).render(listCards);
+  popupImageOpenButton.addEventListener("click", () => {
+    // обработчик события открытия галереи
+    image.src = popupImageOpenButton.src;
+    imageTitle.textContent = popupImageOpenButton.alt;
+    openPopup(popupImage);
+  });
 
   closePopup(popupPlace);
 });
@@ -214,6 +220,15 @@ popupImageOverlay.addEventListener("click", () => {
 
 initialCards.forEach((element) => {
   new Card(element, "").render(listCards);
+  image.addEventListener("click", () => {
+    // обработчик события открытия галереи
+    image.src = popupImageOpenButton.src;
+    imageTitle.textContent = popupImageOpenButton.alt;
+    openPopup(popupImage);
+  });
+
+
+  
 });
 
 

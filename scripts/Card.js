@@ -37,15 +37,7 @@ class Card {
 
 
 
-  _popupCard = () =>
-  {
-    const popupImageOpenButton = document.querySelector(".element__image");
-    image.src = this.link;
-    imageTitle.textContent = this.name;
-     openPopup(popupImageOpenButton);
-   
-  }
-
+  
   _setEventListeners = () => {
     this._newCard
       .querySelector(".element__delete-button")
@@ -59,11 +51,7 @@ class Card {
         this._toggleLike(evt.target.closest(".element__like-button"));
       });
 
-      this._newCard
-      .querySelector(".element__image")
-      .addEventListener("click", (evt) => {
-        this._popupCard (evt.target)
-      });
+   
 
 
 
