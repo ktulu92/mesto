@@ -1,7 +1,7 @@
+import {OpenImagePopup}  from "./utils.js"
+
 class Card {
   
-
-
   constructor(CardData, cardSelector) {
     this._image = CardData.link;
     this._text = CardData.name;
@@ -25,7 +25,6 @@ class Card {
     this._setEventListeners();
     return this._newCard;
   };
- 
 
   _toggleLike = () => {
     this._newCard
@@ -35,9 +34,10 @@ class Card {
 
   _deleteCard = () => {
     this._newCard.remove();
-    this._newCard = null
+    this._newCard = null;
   };
 
+   
   _setEventListeners = () => {
     this._newCard
       .querySelector(".element__delete-button")
@@ -50,7 +50,20 @@ class Card {
       .addEventListener("click", (evt) => {
         this._toggleLike(evt.target.closest(".element__like-button"));
       });
-  };
+
+    this._newCard
+    .querySelector(".element__image")
+    .addEventListener("click", (evt) => {
+    OpenImagePopup(evt.target.closest(".element__image"));
+  });
+
+
+
+
+
+
+
+}
 }
 
 // this._newCard.querySelector(".element__image").addEventListener("click", () => {
