@@ -106,19 +106,19 @@ addElementForm.addEventListener("submit", (event) => {
   //
 });
 
-popupPlaceCloseButton.addEventListener("click", (event) => {
+popupPlaceCloseButton.addEventListener("click", () => {
   // обработчик события закрытия места
 
   closePopup(popupPlace);
 });
 
-popupImageCloseButton.addEventListener("click", (event) => {
+popupImageCloseButton.addEventListener("click", () => {
   // обработчик события закрытия места
 
   closePopup(popupImage);
 });
 
-popupPlaceOpenButton.addEventListener("click", (event) => {
+popupPlaceOpenButton.addEventListener("click", () => {
   // обработчик события открытия и добавления новой карточки места
   popupPlaceSubmitButton.classList.add("pop-up__submit-button_type_disabled");
   addElementForm.reset();
@@ -152,13 +152,12 @@ popupImageOverlay.addEventListener("click", () => {
   closePopup(popupImage);
 });
 
-//закрытие попапов по нажатию esc
 
 
 
 
 
-//Работа с классами (создание карточке и включение валидации)
+//Работа с классами (создание карточек и включение валидации)
 
 const elementsList = document.querySelector(".elements");
 

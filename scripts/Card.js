@@ -1,4 +1,4 @@
-import {OpenImagePopup}  from "./utils.js"
+import {openPopup,popupImage,popupTitle,popupImageContainer}  from "./utils.js"
 
 class Card {
   
@@ -20,6 +20,7 @@ class Card {
     this._newCard = this._getTemplate();
 
     this._newCard.querySelector(".element__image").src = this._image;
+    this._newCard.querySelector(".element__image").alt = this._image;
     this._newCard.querySelector(".element__title").textContent = this._text;
 
     this._setEventListeners();
@@ -36,7 +37,21 @@ class Card {
     this._newCard.remove();
     this._newCard = null;
   };
+  
+  
+ 
 
+
+
+  _openImage =() =>{
+   openPopup(popupImage)
+   popupTitle.textContent = this._text;
+   popupImageContainer.src = this._image
+   popupImageContainer.alt = this._text
+   console.log(popupTitle._title)
+
+
+  }
    
   _setEventListeners = () => {
     this._newCard
@@ -54,7 +69,9 @@ class Card {
     this._newCard
     .querySelector(".element__image")
     .addEventListener("click", (evt) => {
-    OpenImagePopup(evt.target.closest(".element__image"));
+      
+      
+      this._openImage(evt.target.closest(".element__image"));
   });
 
 

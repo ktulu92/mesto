@@ -1,11 +1,14 @@
-const ESC_KEYCODE = 27;
+export const ESC_KEYCODE = 27;
      
-const popupImage = document.querySelector(".pop-up_type_image");
+export const popupImage = document.querySelector(".pop-up_type_image");
+
+export const popupTitle = popupImage.querySelector('.pop-up__image-title');
+export const popupImageContainer = popupImage.querySelector('.pop-up_container_type_image');
+
 
   
   
-  
-  const initialCards = [
+export   const initialCards = [
     {
       name: "Бали",
       link: "./images/Бали.jpg",
@@ -32,7 +35,7 @@ const popupImage = document.querySelector(".pop-up_type_image");
     },
   ];
 
-  const validationData = {
+ export  const validationData = {
     formSelector: ".pop-up__container",
     inputSelector: ".pop-up__input",
     submitButtonSelector: ".pop-up__submit-button",
@@ -43,11 +46,7 @@ const popupImage = document.querySelector(".pop-up_type_image");
 
 
 export const OpenImagePopup = function () {
-    const image = document.querySelector(".pop-up_container_type_image");
-    const imageTitle = document.querySelector(".pop-up__image-title");
-    const popupImageOpenButton = document.querySelector(".element__image");
-    image.src = popupImageOpenButton.src;
-    imageTitle.textContent = popupImageOpenButton.alt;
+    // 
     openPopup(popupImage);
   };
 
@@ -67,13 +66,12 @@ export const OpenImagePopup = function () {
     };
 
 
-    export const closePopup = function (popup) {
-        
+    export const closePopup = function (popup) {        
         popup.classList.remove("pop-up_opened");
         document.removeEventListener("keydown", handlePopupClose(popup));
       };
  
 
 
-    export{initialCards}
-    export {validationData}
+  
+    
