@@ -1,7 +1,11 @@
-import {openPopup,popupImage,popupTitle,popupImageContainer}  from "./utils.js"
+import {
+  openPopup,
+  popupImage,
+  popupTitle,
+  popupImageContainer,
+} from "./utils.js";
 
 class Card {
-  
   constructor(CardData, cardSelector) {
     this._image = CardData.link;
     this._text = CardData.name;
@@ -37,22 +41,14 @@ class Card {
     this._newCard.remove();
     this._newCard = null;
   };
-  
-  
- 
 
+  _openImage = () => {
+    openPopup(popupImage);
+    popupTitle.textContent = this._text;
+    popupImageContainer.src = this._image;
+    popupImageContainer.alt = this._text;
+  };
 
-
-  _openImage =() =>{
-   openPopup(popupImage)
-   popupTitle.textContent = this._text;
-   popupImageContainer.src = this._image
-   popupImageContainer.alt = this._text
-   console.log(popupTitle._title)
-
-
-  }
-   
   _setEventListeners = () => {
     this._newCard
       .querySelector(".element__delete-button")
@@ -67,27 +63,11 @@ class Card {
       });
 
     this._newCard
-    .querySelector(".element__image")
-    .addEventListener("click", (evt) => {
-      
-      
-      this._openImage(evt.target.closest(".element__image"));
-  });
-
-
-
-
-
-
-
+      .querySelector(".element__image")
+      .addEventListener("click", (evt) => {
+        this._openImage(evt.target.closest(".element__image"));
+      });
+  };
 }
-}
-
-// this._newCard.querySelector(".element__image").addEventListener("click", () => {
-//   // обработчик события открытия галереи
-//   image.src = this._newCard.querySelector(".element__image").src;
-//   imageTitle.textContent = this._newCard.querySelector(".element__image").alt;
-//   openPopup(popupImage);
-// });
 
 export { Card };

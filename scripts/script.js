@@ -3,15 +3,11 @@ import { openPopup } from "./utils.js";
 import { Card } from "./Card.js";
 import { validationData } from "./utils.js";
 import { initialCards } from "./utils.js";
-import {closePopup}  from "./utils.js";
-import {handlePopupClose} from "./utils.js";
-
-
-
+import { closePopup } from "./utils.js";
 const templateSelector = ".template-element";
-const listCards = document.querySelector(".elements"); //список для карточек
+
 const addElementForm = document.querySelector(".pop-up__form_type_add-card"); //форма для добавления карты
-const elementTemplate = document.querySelector(".template-element"); //темплейт элемент
+
 const inputName = addElementForm.querySelector(".pop-up__input_type_name"); //объявляем инпут для имени карточки
 const inputLink = addElementForm.querySelector(
   ".pop-up__input_type_image-link"
@@ -31,7 +27,7 @@ const popupPlaceSubmitButton = document.querySelector(
 const popupProfileSubmitButton = document.querySelector(
   ".pop-up__profile-submit-button"
 );
-const popupImageOpenButton = document.querySelector(".element__image");
+
 
 const popupProfile = document.querySelector(".pop-up-profile");
 const popupPlace = document.querySelector(".pop-up-place");
@@ -51,16 +47,7 @@ const newProfileDescription = popupProfile.querySelector(
   ".pop-up__input_type_description"
 );
 
-
-
-
-
-
 //функция Закрытие попапа
-
-
-
-
 
 // объявляем переменные попапов и кнопок которые их закрывают и открывают
 
@@ -82,9 +69,8 @@ popupProfileOpenButton.addEventListener("click", () => {
   openPopup(popupProfile);
 });
 
-const formElement = document.querySelector(".pop-up__container"); 
+const formElement = document.querySelector(".pop-up__container");
 formElement.addEventListener("submit", (event) => {
-  
   event.preventDefault();
   profileTitle.textContent = newProfileTitle.value;
   profileSubtitle.textContent = newProfileDescription.value;
@@ -126,21 +112,6 @@ popupPlaceOpenButton.addEventListener("click", () => {
   openPopup(popupPlace);
 });
 
-popupProfileOverlay.onkeydown = function (event) {
-  if (event.keyCode == ESC_KEYCODE) {
-    closePopup(popupProfile);
-  }
-};
-
-popupPlaceOverlay.onkeydown = function (event) {
-  if (event.keyCode == ESC_KEYCODE) {
-    closePopup(popupPlace);
-  }
-};
-
-
-
-//закрытие попапов по клику на оверлей
 
 popupProfileOverlay.addEventListener("click", () => {
   closePopup(popupProfile);
@@ -151,11 +122,6 @@ popupPlaceOverlay.addEventListener("click", () => {
 popupImageOverlay.addEventListener("click", () => {
   closePopup(popupImage);
 });
-
-
-
-
-
 
 //Работа с классами (создание карточек и включение валидации)
 
