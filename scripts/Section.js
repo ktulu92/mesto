@@ -1,4 +1,4 @@
-export default Section {
+  class Section {
     constructor({items,renderer},containerSelector){
         this._items = items;
         this._renderer = renderer;
@@ -6,13 +6,16 @@ export default Section {
     }
 //метод отрисовки всех элементов
 rendererItems() {
-this._items.forEach(item => {
+this._items.forEach((item) => {
     this._renderer(item)
     
-});}
+});
+}
 
 addItem(element){
     this._containerElement.prepend(element)
 }
 
 }
+
+export default Section;

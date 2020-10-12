@@ -44,23 +44,3 @@ export const validationData = {
   errorClass: "pop-up__error_element_type_active",
 };
 
-export const OpenImagePopup = function () {
-  openPopup(popupImage);
-};
-
-export const openPopup = function (popup) {
-  popup.classList.add("pop-up_opened");
-  document.addEventListener("keydown", handlePopupClose);
-};
-
-export const closePopup = function (popup) {
-  popup.classList.remove("pop-up_opened");
-  document.removeEventListener("keydown", handlePopupClose);
-};
-
-export const handlePopupClose = (event) => {
-  if (event.which === ESC_KEYCODE) {
-    const target = document.querySelector(".pop-up_opened");
-    closePopup(target);
-  }
-};
