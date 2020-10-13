@@ -10,8 +10,12 @@ import UserInfo from "./UserInfo.js";
 const templateSelector = ".template-element";
 const addElementForm = document.querySelector(".pop-up__form_type_add-card");
 const inputName = addElementForm.querySelector(".pop-up__input_type_name");
-const inputLink = addElementForm.querySelector(".pop-up__input_type_image-link");
-const editProfileForm = document.querySelector(".pop-up__form_type_edit-profile");
+const inputLink = addElementForm.querySelector(
+  ".pop-up__input_type_image-link"
+);
+const editProfileForm = document.querySelector(
+  ".pop-up__form_type_edit-profile"
+);
 const addCardForm = document.querySelector(".pop-up__form_type_add-card");
 //валидация
 const validatorProfile = new FormValidator(validationData, editProfileForm);
@@ -50,12 +54,11 @@ const profileData = {
 };
 
 const profileInfo = new UserInfo(profileData);
-
+const name = document.querySelector(".pop-up__input_type_name");
+const info = document.querySelector(".pop-up__input_type_description");
 
 const profileSelector = ".pop-up-profile";
 const popupProfile = new PopupWithForm(profileSelector, () => {
-  const name = document.querySelector(".pop-up__input_type_name").value;
-  const info = document.querySelector(".pop-up__input_type_description").value;
   profileInfo.setUserInfo({ name, info });
 
   popupProfile.close();
@@ -63,8 +66,12 @@ const popupProfile = new PopupWithForm(profileSelector, () => {
 const popupProfileOpenButton = document.querySelector(".profile__edit-button");
 popupProfile.setEventListeners();
 popupProfileOpenButton.addEventListener("click", () => {
+  //  profileInfo.getUserInfo()
 
+  name.value = profileInfo.getUserInfo().nameData;
+  info.value = profileInfo.getUserInfo().infoData;
 
+  //
 
   popupProfile.open();
 });

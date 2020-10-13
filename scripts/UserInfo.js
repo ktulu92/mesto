@@ -8,15 +8,16 @@ export default class UserInfo{
     }
 
 getUserInfo(){
-    return  {
-        profileTitle: this.profileTitle.textContent,
-        profileSubtitle: this.profileSubtitle.textContent
+    this._userData = {    
+        nameData: this._profileTitle.textContent,
+        infoData: this._profileSubtitle.textContent
     }
+    return  this._userData
    
 }
 
 setUserInfo({name,info}){
-    this._profileTitle.textContent = name
-    this._profileSubtitle.textContent = info
+    this._profileTitle.textContent = name.value
+    this._profileSubtitle.textContent = info.value
 }
 }

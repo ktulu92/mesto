@@ -17,12 +17,14 @@ export default class PopupWithForm extends Popup {
 
   setEventListeners() {
     super.setEventListeners();
+    this._formElement = this._popup.querySelector('.pop-up__container') ;
 
     this._popup.addEventListener("submit", this._submitForm);
   }
   close() {
     super.close();
-    
+    this._formElement.reset();
+   
   
   }
 }
