@@ -11,27 +11,27 @@ export const popupImageContainer = popupImage.querySelector(
 export const initialCards = [
   {
     name: "Бали",
-    link: "./images/Бали.jpg",
+    link: "https://cdn.pixabay.com/photo/2020/10/09/20/09/library-5641389_960_720.jpg",
   },
   {
     name: "Кения ",
-    link: "./images/Кения.jpg",
+    link: "https://cdn.pixabay.com/photo/2020/10/09/20/09/library-5641389_960_720.jpg",
   },
   {
     name: "Лиссабон",
-    link: "./images/Лиссабон.jpg",
+    link: "https://cdn.pixabay.com/photo/2020/10/09/20/09/library-5641389_960_720.jpg",
   },
   {
     name: "Невада",
-    link: "./images/Невада.jpg",
+    link: "https://cdn.pixabay.com/photo/2020/10/09/20/09/library-5641389_960_720.jpg",
   },
   {
     name: "Сиракузы ",
-    link: "./images/Сиракузы.jpg",
+    link: "https://cdn.pixabay.com/photo/2020/10/09/20/09/library-5641389_960_720.jpg",
   },
   {
     name: "Стокгольм",
-    link: "./images/Стокгольм.jpg",
+    link: "https://cdn.pixabay.com/photo/2020/10/09/20/09/library-5641389_960_720.jpg",
   },
 ];
 

@@ -1,3 +1,5 @@
+// var HtmlWebpackPlugin = require('html-webpack-plugin');var HtmlWebpackPlugin = require('html-webpack-plugin');
+import "../pages/index.css";
 import PopupWithForm from "./PopupWithForm.js";
 import PopupWithImage from "./PopupWithImage.js";
 import Card from "./Card.js";
@@ -6,6 +8,8 @@ import { validationData } from "./utils.js";
 import { initialCards } from "./utils.js";
 import Section from "./Section.js";
 import UserInfo from "./UserInfo.js";
+
+
 
 const templateSelector = ".template-element";
 const addElementForm = document.querySelector(".pop-up__form_type_add-card");

@@ -1,49 +1,61 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  
-    entry: { main: './src/scripts/index.js' },
-    output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'main.js',
+  entry: "./src/scripts/index.js",
+  output: {
+    filename: "main.js",
+    path: path.resolve(__dirname, "dist"),
+    publicPath: "/",
+  },
 
-    
-      
-    
-  },
-  
-    module: {
-    rules: [ // rules — это массив правил
-      // добавим в него объект правил для бабеля
-      {
-        // регулярное выражение, которое ищет все js файлы
-        test: /\.js$/,
-        // при обработке этих файлов нужно использовать babel-loader
-        loader: 'babel-loader',
-        // исключает папку node_modules, файлы в ней обрабатывать не нужно
-        exclude: '/node_modules/',
-        
-      },
-      // добавили правило для обработки файлов
-    {
-      // регулярное выражение, которое ищет все файлы с такими расширениями
-      test: /\.(png|svg|jpg|gif|woff2)$/,
-      // при обработке этих файлов нужно использовать file-loader
-      loader: 'file-loader'
-    },
-    // аналогично добавьте правило для работы с html
-    {
-      test: /\.html$/,
-      loader: 'html-loader',
-    }
-      ],
-     
-  },
+    //  devServer: {
+    //   contentBase: path.join(__dirname, 'public')},
+
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html'
-       // путь к файлу index.html
-    })
-  ]  
-}; 
+      template: "src/index.html",
+    
+    }),
+    new MiniCssExtractPlugin(),
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.m?js$/,
+        exclude: /(node_modules)/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env"],
+            plugins: [
+             
+              "@babel/plugin-proposal-object-rest-spread",
+              "@babel/plugin-syntax-class-properties",
+            ],
+          },
+        },
+      },
+
+      {
+        test: /\.(png|jpe?g|gif|jpg|svg|otf)$/i,
+        use: [
+          {
+            loader: "file-loader",
+          },
+        ],
+      },
+
+      {
+        test: /\.html$/i,
+        loader: "html-loader",
+      },
+      { test: /\.css$/i, 
+        use: [MiniCssExtractPlugin.loader, "css-loader"] },
+    ],
+  },
+
+  devtool: "inline-source-map",
+  //   mode: 'development'
+};
