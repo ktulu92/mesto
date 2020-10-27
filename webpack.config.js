@@ -1,22 +1,21 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  entry: "./src/scripts/index.js",
+  entry: "./src/pages/index.js",
   output: {
     filename: "main.js",
     path: path.resolve(__dirname, "dist"),
     publicPath: "/",
   },
 
-    //  devServer: {
-    //   contentBase: path.join(__dirname, 'public')},
+  //  devServer: {
+  //   contentBase: path.join(__dirname, 'public')},
 
   plugins: [
     new HtmlWebpackPlugin({
       template: "src/index.html",
-    
     }),
     new MiniCssExtractPlugin(),
   ],
@@ -30,7 +29,6 @@ module.exports = {
           options: {
             presets: ["@babel/preset-env"],
             plugins: [
-             
               "@babel/plugin-proposal-object-rest-spread",
               "@babel/plugin-syntax-class-properties",
             ],
@@ -51,11 +49,23 @@ module.exports = {
         test: /\.html$/i,
         loader: "html-loader",
       },
-      { test: /\.css$/i, 
-        use: [MiniCssExtractPlugin.loader, "css-loader"] },
+
+      {
+        test: /\.css$/i,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: "css-loader",
+            options: {
+              importLoaders: 1,
+            },
+          },
+          "postcss-loader",
+        ],
+      },
     ],
   },
 
-  devtool: "inline-source-map",
+  // devtool: "inline-source-map",
   //   mode: 'development'
 };

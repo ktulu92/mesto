@@ -1,13 +1,13 @@
 // var HtmlWebpackPlugin = require('html-webpack-plugin');var HtmlWebpackPlugin = require('html-webpack-plugin');
 import "../pages/index.css";
-import PopupWithForm from "./PopupWithForm.js";
-import PopupWithImage from "./PopupWithImage.js";
-import Card from "./Card.js";
-import FormValidator from "./FormValidator.js";
-import { validationData } from "./utils.js";
-import { initialCards } from "./utils.js";
-import Section from "./Section.js";
-import UserInfo from "./UserInfo.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
+import { validationData } from "../components/utils.js";
+import { initialCards } from "../components/utils.js";
+import Section from "../components/Section.js";
+import UserInfo from "../components/UserInfo.js";
 
 
 
@@ -98,4 +98,3 @@ const popupAddCardOpenButton = document.querySelector(".profile__add-button");
 popupAddCardOpenButton.addEventListener("click", () => {
   popupAddCard.open();
 });
-let someStr = 'Изменил, сохранил, собрал';
