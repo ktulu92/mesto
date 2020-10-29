@@ -7,11 +7,11 @@ module.exports = {
   output: {
     filename: "main.js",
     path: path.resolve(__dirname, "dist"),
-    publicPath: "/",
+    publicPath: "/mesto",
   },
 
-  //  devServer: {
-  //   contentBase: path.join(__dirname, 'public')},
+   devServer: {
+    contentBase: path.join(__dirname, 'dist')},
 
   plugins: [
     new HtmlWebpackPlugin({

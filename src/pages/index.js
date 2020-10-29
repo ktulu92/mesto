@@ -9,8 +9,6 @@ import { initialCards } from "../components/utils.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 
-
-
 const templateSelector = ".template-element";
 const addElementForm = document.querySelector(".pop-up__form_type_add-card");
 const inputName = addElementForm.querySelector(".pop-up__input_type_name");
