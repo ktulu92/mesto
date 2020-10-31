@@ -6,6 +6,7 @@
 @import url(./__title/pop-up__title.css);
 @import url(./_type/pop-up_type_image.css);
 @import url(./__container/_type/pop-up_container_type_image.css);
+@import url(./__image/pop-up__image.css);
 @import url(./__image-title/pop-up__image-title.css);
 @import url(./__image-close-button/pop-up__image-close-button.css);
 @import url(./__overlay/pop-up__overlay.css);

@@ -1,6 +1,5 @@
 .pop-up_type_image{
     display: flex;
-    position: relative;
     top:0;
     left:0;
     height: 100%;
@@ -15,4 +14,5 @@
   }
 
 
+ 
 

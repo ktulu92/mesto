@@ -5,8 +5,8 @@
     border: none;
     object-position: center;
     object-fit: none;
-    top: -10%;
-    left: 100%;
+    top: -50px;
+    left: 99%;
     background: url(../../../images/close-icon.svg);
     
     
@@ -19,6 +19,6 @@ opacity: 0.6;
   
   @media (min-width:320px) and (max-width:600px){
     .pop-up__image-close-button{
-      top: -30%;
+      top: -50px;
       left: 95%;
   }}

@@ -11,10 +11,10 @@ import UserInfo from "../components/UserInfo.js";
 
 const templateSelector = ".template-element";
 const addElementForm = document.querySelector(".pop-up__form_type_add-card");
-const inputName = addElementForm.querySelector(".pop-up__input_type_name");
-const inputLink = addElementForm.querySelector(
-  ".pop-up__input_type_image-link"
-);
+// const inputName = addElementForm.querySelector(".pop-up__input_type_name");
+// const inputLink = addElementForm.querySelector(
+//   ".pop-up__input_type_image-link"
+// );
 const editProfileForm = document.querySelector(
   ".pop-up__form_type_edit-profile"
 );
@@ -60,33 +60,27 @@ const name = document.querySelector(".pop-up__input_type_name");
 const info = document.querySelector(".pop-up__input_type_description");
 
 const profileSelector = ".pop-up-profile";
-const popupProfile = new PopupWithForm(profileSelector, () => {
-  profileInfo.setUserInfo({ name, info });
+const popupProfile = new PopupWithForm(profileSelector, (data) => {
+  profileInfo.setUserInfo(data);
 
   popupProfile.close();
 });
 const popupProfileOpenButton = document.querySelector(".profile__edit-button");
 popupProfile.setEventListeners();
 popupProfileOpenButton.addEventListener("click", () => {
-  //  profileInfo.getUserInfo()
-
   name.value = profileInfo.getUserInfo().nameData;
   info.value = profileInfo.getUserInfo().infoData;
 
-  //
+ 
 
   popupProfile.open();
 });
 
 //Создание попапа добавления карточки
 const CardSelector = ".pop-up-place";
-const popupAddCard = new PopupWithForm(CardSelector, () => {
-  const userCard = {
-    name: inputName.value,
-    link: inputLink.value,
-  };
+const popupAddCard = new PopupWithForm(CardSelector, (data) => {
   //добавление карты
-  const card = new Card(userCard, templateSelector, handleCardClick);
+  const card = new Card(data, templateSelector, handleCardClick);
   elementsList.prepend(card.render());
   popupAddCard.close();
 });

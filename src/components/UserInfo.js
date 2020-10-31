@@ -16,8 +16,11 @@ getUserInfo(){
    
 }
 
-setUserInfo({name,info}){
-    this._profileTitle.textContent = name.value
-    this._profileSubtitle.textContent = info.value
+setUserInfo(data){
+
+    this._profileTitle.textContent = data.name
+    this._profileSubtitle.textContent = data.description
+   
+    
 }
 }
