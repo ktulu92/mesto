@@ -14,7 +14,14 @@
 
       <main class="content">
         <section class="profile">
+          <div class="profile__container">
+           
           <img class="profile__avatar" src="./images/kusto.png" alt="Аватар" />
+          <div class="profile__layout">
+            <button class="profile__edit-avatar"></button>
+          </div>
+        </div>
+        
           <div class="profile__info">
             <div class="profile__name-container">
               <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -129,7 +136,7 @@
             name="Сохранить"
             type="submit"
           >
-            Сохранить
+           Создать
           </button>
         </form>
         <div class="pop-up__overlay pop-up__overlay_type_place"></div>
@@ -145,6 +152,49 @@
           <div class="pop-up__overlay pop-up__overlay_type_image"></div>
         </figure>
       </section>
+
+      <section class= "pop-up pop-up__confirm" >
+        <div class="pop-up__container">
+        <button class="pop-up__close-button pop-up__image-close-button"
+        ></button>
+        <h2 class="pop-up__title">Вы уверены?</h2>
+
+        <button class=" pop-up__submit-button popup__confirm-button">Да</button>
+
+      </div>
+      </section>
+
+      <section class= "pop-up pop-up__edit-avatar ">
+        <div class="pop-up__container">
+          <button class="pop-up__close-button pop-up__image-close-button"
+        ></button>
+        <h2 class="pop-up__title">Обновить аватар</h2>
+        <input
+        class="pop-up__input pop-up__input_type_avatar-link"
+        type="url"
+        placeholder="Ссылка на аватар"
+        required
+        id="pop-up__input_type_avatar-link"
+        name="avatar-link"
+      />
+      <span
+        class="pop-up__error"
+        id="pop-up__input_type_image-link-error"
+      ></span>
+      <button class=" pop-up__submit-button popup__edit-avatar-button">Сохранить</button>
+
+    </div>
+        
+        
+
+        </div>
+
+
+      </section>
+
+
+
+      
     </div>
 
     <template class="template-element">
@@ -153,7 +203,10 @@
         <img class="element__image" src="#" alt="" />
         <div class="element__info">
           <h2 class="element__title"></h2>
+          <div class="element__like-container">
           <button class="element__like-button"></button>
+          <p class="element__like-count">1</p>
+          </div>
         </div>
       </li>
     </template>

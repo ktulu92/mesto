@@ -8,6 +8,9 @@ import { validationData } from "../components/utils.js";
 import { initialCards } from "../components/utils.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
+import Api from "../components/Api.js";
+
+
 
 const templateSelector = ".template-element";
 const addElementForm = document.querySelector(".pop-up__form_type_add-card");
@@ -26,21 +29,32 @@ validatorProfile.enableValidation();
 validatorPlace.enableValidation();
 
 const elementsList = document.querySelector(".elements");
-const CardList = new Section(
-  {
-    items: initialCards,
-    renderer: (element) => {
-      const card = new Card(
-        element,
-        templateSelector,
-        handleCardClick
-      ).render();
-      CardList.addItem(card);
+
+const api = new Api()
+const cardsData =api.getInitialCards().then((data) => { const initialCards  = data.map(cards => cards)
+
+  console.log (initialCards)
+
+  const CardList = new Section(
+    {
+      
+      items: initialCards,
+      renderer: (element) => {
+        const card = new Card(
+          element,
+          templateSelector,
+          handleCardClick
+        ).render();
+        CardList.addItem(card);
+      },
     },
-  },
-  ".elements"
-);
-CardList.rendererItems();
+    ".elements"
+  );
+  
+  CardList.rendererItems();
+})
+
+
 
 //попап галереи
 const popupGallery = new PopupWithImage(".pop-up_type_image");
@@ -90,3 +104,16 @@ const popupAddCardOpenButton = document.querySelector(".profile__add-button");
 popupAddCardOpenButton.addEventListener("click", () => {
   popupAddCard.open();
 });
+
+
+
+
+// const a = new Api()
+// a.getInitialCards()
+// const b =a.getInitialCards().then((data) => {return data})
+// console.log(b)
+
+const c =a.getProfileInfo().then((data) => {return data})
+// console.log(c)
+
+

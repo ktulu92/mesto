@@ -13,6 +13,8 @@
 @import url(./__error/pop-up__error.css);
 @import url(../pop-up/__error/_type/pop-up__error_element_type_active.css);
 @import url(./__field/pop-up__field.css);
+@import url(./__confirm/pop-up__confirm.css);
+@import url(./__edit-avatar/pop-up__edit-avatar.css);
 
 .pop-up {
   display: flex;
