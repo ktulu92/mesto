@@ -10,8 +10,6 @@ import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
 
-
-
 const templateSelector = ".template-element";
 const addElementForm = document.querySelector(".pop-up__form_type_add-card");
 // const inputName = addElementForm.querySelector(".pop-up__input_type_name");
@@ -22,22 +20,26 @@ const editProfileForm = document.querySelector(
   ".pop-up__form_type_edit-profile"
 );
 const addCardForm = document.querySelector(".pop-up__form_type_add-card");
+const editAvatarForm = document.querySelector(".pop-up__form_type_edit-avatar");
+
 //валидация
-const validatorProfile = new FormValidator(validationData, editProfileForm);
-const validatorPlace = new FormValidator(validationData, addCardForm);
+const validatorProfile = new FormValidator(validationData, editProfileForm); //для попапа редактирования профиля
+const validatorPlace = new FormValidator(validationData, addCardForm); //для попапа добавления карточки
+const validatorAvatar = new FormValidator(validationData, editAvatarForm);//для попапа редактирования аватара профиля
+
 validatorProfile.enableValidation();
 validatorPlace.enableValidation();
+validatorAvatar.enableValidation();
 
 const elementsList = document.querySelector(".elements");
 
-const api = new Api()
-const cardsData =api.getInitialCards().then((data) => { const initialCards  = data.map(cards => cards)
+const api = new Api();
 
-  console.log (initialCards)
+const cardsData = api.getInitialCards().then((data) => {
+  const initialCards = data.map((cards) => cards);
 
   const CardList = new Section(
     {
-      
       items: initialCards,
       renderer: (element) => {
         const card = new Card(
@@ -50,11 +52,9 @@ const cardsData =api.getInitialCards().then((data) => { const initialCards  = da
     },
     ".elements"
   );
-  
+
   CardList.rendererItems();
-})
-
-
+});
 
 //попап галереи
 const popupGallery = new PopupWithImage(".pop-up_type_image");
@@ -67,40 +67,105 @@ function handleCardClick(image, text) {
 const profileData = {
   profileTitleSelector: ".profile__title",
   profileSubtitleSelector: ".profile__subtitle",
+  profileAvatarSelector: ".profile__avatar",
 };
 
+const name = document.querySelector(".pop-up__input_type_name"); //nameInput
+const info = document.querySelector(".pop-up__input_type_description"); //infoInput
+const avatar = document.querySelector(".pop-up__input_type_avatar-link"); //avatarInput
+
 const profileInfo = new UserInfo(profileData);
-const name = document.querySelector(".pop-up__input_type_name");
-const info = document.querySelector(".pop-up__input_type_description");
 
-const profileSelector = ".pop-up-profile";
-const popupProfile = new PopupWithForm(profileSelector, (data) => {
-  profileInfo.setUserInfo(data);
-
-  popupProfile.close();
+api.getProfileInfo().then((data) => {
+  //забрали данные пользователя с сервера
+  profileInfo.setUserInfo(data); //добавили данные пользователя  с сервера в дом
+  profileInfo.setUserAvatar(data); //добавили аватар пользователя с сервера в дом
 });
-const popupProfileOpenButton = document.querySelector(".profile__edit-button");
-popupProfile.setEventListeners();
+
+
+
+
+//Создание попапа редактирования профиля
+const profileSelector = ".pop-up-profile";   //Селектор попапа редактирования аватара
+const popupProfileOpenButton = document.querySelector(".profile__edit-button"); //Кнопка открытия попапа
+
+const popupProfile = new PopupWithForm(profileSelector, () => {    //cоздание экземпляра класса попапа октрытия профиля  
+ api.editProfile(name.value,info.value)    //меняем данные на сервере.
+ api.getProfileInfo().then((data) => {     //забрали данные пользователя с сервера
+  profileInfo.setUserInfo(data)})          //обовляем данные в доме
+  
+  popupProfile.close()//закрываем попап
+});
+
+popupProfile.setEventListeners(); //вешаем бработчики событий
 popupProfileOpenButton.addEventListener("click", () => {
-  name.value = profileInfo.getUserInfo().nameData;
-  info.value = profileInfo.getUserInfo().infoData;
+  name.value = profileInfo.getUserInfo().nameData; //заполняем инпут имени пользователя текущим значение дом-элемента
+  info.value = profileInfo.getUserInfo().infoData;//заполняем инпут информации о  пользователе текущим значение дом-элемента
 
- 
+  popupProfile.open(); //открытие попапа редактирования профиля 
+});
 
-  popupProfile.open();
+// Создание попапа редактирования аватара
+const popupProfileSelector = ".pop-up__edit-avatar"; //Селектор попапа редактирования аватара
+const popupAvatar = new PopupWithForm(popupProfileSelector, () => {
+  api.updateUserAvatar(avatar.value).then((data) => {
+    //забрали данные  с сервера и внесли данные пользователя в дом
+    profileInfo.setUserAvatar(data);
+  });
+  popupAvatar.close(); //закрыли попап
+});
+
+popupAvatar.setEventListeners();
+
+const popupAddAvatarOpenButton = document.querySelector(
+  ".profile__edit-avatar"
+);
+popupAddAvatarOpenButton.addEventListener("click", () => {
+  avatar.value = profileInfo.getUserInfo().avatarData;
+  popupAvatar.open();
 });
 
 //Создание попапа добавления карточки
 const CardSelector = ".pop-up-place";
 const popupAddCard = new PopupWithForm(CardSelector, (data) => {
+  api.addNewCard(data);
+  // .then((data)=> data);
+
+
+
+handleLikeClick = () =>{
+
+
+
+
+}
+
+handleDeleteIconClick =() => {
+  
+}
+
+
+
+
+
+
+
+
+
+
+
   //добавление карты
-  const card = new Card(data, templateSelector, handleCardClick);
+  const card = new Card(data, templateSelector, {
+    handleCardClick,
+    handleLikeClick: () => {},
+    handleDeleteIconClick: (card) => {},
+  });
   elementsList.prepend(card.render());
   popupAddCard.close();
 });
+
 popupAddCard.setEventListeners();
 const popupAddCardOpenButton = document.querySelector(".profile__add-button");
-
 popupAddCardOpenButton.addEventListener("click", () => {
   popupAddCard.open();
 });
@@ -108,12 +173,34 @@ popupAddCardOpenButton.addEventListener("click", () => {
 
 
 
-// const a = new Api()
-// a.getInitialCards()
-// const b =a.getInitialCards().then((data) => {return data})
-// console.log(b)
-
-const c =a.getProfileInfo().then((data) => {return data})
-// console.log(c)
 
 
+
+
+//создание попапа подтверждения удаления карточки
+
+// const popupSubmit = new PopupSubmit(popupSubmitSelector,  ()=> {
+//   // опишем фунцию сабмита
+//   //здесь будет сначала удаление с сервера
+
+//   // потом удаление из ДОМ
+
+//   // потом закрытие попапа
+
+//   popupSubmit.close()
+// }
+
+// submit: (data) => {
+//   api.deleteCard(data)
+//     .then(() => {
+//       tempCard.deleteCard();
+//     })
+//     .then(() => {
+//       tempCard = null;
+//       popupWithConfirm.close();
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     })
+
+// })

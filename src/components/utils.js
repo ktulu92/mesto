@@ -4,7 +4,11 @@ export const popupImage = document.querySelector(".pop-up_type_image");
 
 export const popupTitle = popupImage.querySelector(".pop-up__image-title");
 
+
+
 export const popupImageContainer = popupImage.querySelector(".pop-up__image");
+
+
 
 export const initialCards = [
   {
