@@ -9,6 +9,7 @@ import { initialCards } from "../components/utils.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
+import PopupSubmit from "../components/PopupSubmit.js";
 
 const templateSelector = ".template-element";
 const addElementForm = document.querySelector(".pop-up__form_type_add-card");
@@ -22,10 +23,28 @@ const editProfileForm = document.querySelector(
 const addCardForm = document.querySelector(".pop-up__form_type_add-card");
 const editAvatarForm = document.querySelector(".pop-up__form_type_edit-avatar");
 
+//создание попапа подтверждения
+const popupSumbitSelector = ".pop-up-confirm"
+const popupConfirm = new PopupSubmit(popupSumbitSelector,{
+  handleFormConfirm:(_id)=>{
+//здесь будет смена кнопки на "сохранение"
+  api.deleteCard(_id).then(()=>{
+    //здесь будет смена кнопки на значение по умолчанию "да"
+
+
+    
+  })
+  popupConfirm.close()
+  }}) 
+
+
+  popupConfirm.setEventListeners()
+
+
 //валидация
-const validatorProfile = new FormValidator(validationData, editProfileForm); //для попапа редактирования профиля
-const validatorPlace = new FormValidator(validationData, addCardForm); //для попапа добавления карточки
-const validatorAvatar = new FormValidator(validationData, editAvatarForm);//для попапа редактирования аватара профиля
+const validatorProfile = new FormValidator(validationData, editProfileForm); //для попапа
+const validatorPlace = new FormValidator(validationData, addCardForm);
+const validatorAvatar = new FormValidator(validationData, editAvatarForm);
 
 validatorProfile.enableValidation();
 validatorPlace.enableValidation();
@@ -35,8 +54,35 @@ const elementsList = document.querySelector(".elements");
 
 const api = new Api();
 
-const cardsData = api.getInitialCards().then((data) => {
+let userId; //здесь айди пользователя
+api.getProfileInfo().then((data) => {
+  userId = data._id;
+  console.log(userId);
+});
+
+//
+//а сейчас мы будем описывать  ваши ебучие колбеки
+
+
+function handleLikeClick(){
+ 
+  console.log("функция лайк")
+}
+function handleDeleteIconClick(_id){
+    popupConfirm.open(_id)
+  
+  // api.deleteCard(_id)
+
+console.log("функция удаления")
+popupConfirm.open(_id)
+
+}
+
+
+ api.getInitialCards().then((data) => {
   const initialCards = data.map((cards) => cards);
+
+
 
   const CardList = new Section(
     {
@@ -45,8 +91,12 @@ const cardsData = api.getInitialCards().then((data) => {
         const card = new Card(
           element,
           templateSelector,
-          handleCardClick
+          handleCardClick,
+          handleLikeClick,
+          handleDeleteIconClick,
+          userId
         ).render();
+
         CardList.addItem(card);
       },
     },
@@ -82,27 +132,27 @@ api.getProfileInfo().then((data) => {
   profileInfo.setUserAvatar(data); //добавили аватар пользователя с сервера в дом
 });
 
-
-
-
 //Создание попапа редактирования профиля
-const profileSelector = ".pop-up-profile";   //Селектор попапа редактирования аватара
+const profileSelector = ".pop-up-profile"; //Селектор попапа редактирования аватара
 const popupProfileOpenButton = document.querySelector(".profile__edit-button"); //Кнопка открытия попапа
 
-const popupProfile = new PopupWithForm(profileSelector, () => {    //cоздание экземпляра класса попапа октрытия профиля  
- api.editProfile(name.value,info.value)    //меняем данные на сервере.
- api.getProfileInfo().then((data) => {     //забрали данные пользователя с сервера
-  profileInfo.setUserInfo(data)})          //обовляем данные в доме
-  
-  popupProfile.close()//закрываем попап
+const popupProfile = new PopupWithForm(profileSelector, () => {
+  //cоздание экземпляра класса попапа октрытия профиля
+  api.editProfile(name.value, info.value); //меняем данные на сервере.
+  api.getProfileInfo().then((data) => {
+    //забрали данные пользователя с сервера
+    profileInfo.setUserInfo(data);
+  }); //обовляем данные в доме
+
+  popupProfile.close(); //закрываем попап
 });
 
 popupProfile.setEventListeners(); //вешаем бработчики событий
 popupProfileOpenButton.addEventListener("click", () => {
   name.value = profileInfo.getUserInfo().nameData; //заполняем инпут имени пользователя текущим значение дом-элемента
-  info.value = profileInfo.getUserInfo().infoData;//заполняем инпут информации о  пользователе текущим значение дом-элемента
+  info.value = profileInfo.getUserInfo().infoData; //заполняем инпут информации о  пользователе текущим значение дом-элемента
 
-  popupProfile.open(); //открытие попапа редактирования профиля 
+  popupProfile.open(); //открытие попапа редактирования профиля
 });
 
 // Создание попапа редактирования аватара
@@ -131,76 +181,26 @@ const popupAddCard = new PopupWithForm(CardSelector, (data) => {
   api.addNewCard(data);
   // .then((data)=> data);
 
-
-
-handleLikeClick = () =>{
-
-
-
-
-}
-
-handleDeleteIconClick =() => {
-  
-}
-
-
-
-
-
-
-
-
-
-
-
   //добавление карты
-  const card = new Card(data, templateSelector, {
+ 
+  const card = new Card(
+    data,
+    templateSelector,
     handleCardClick,
-    handleLikeClick: () => {},
-    handleDeleteIconClick: (card) => {},
-  });
+    handleLikeClick,
+    handleDeleteIconClick,    
+    userId
+  )
+  
   elementsList.prepend(card.render());
   popupAddCard.close();
 });
+
+
+
 
 popupAddCard.setEventListeners();
 const popupAddCardOpenButton = document.querySelector(".profile__add-button");
 popupAddCardOpenButton.addEventListener("click", () => {
   popupAddCard.open();
 });
-
-
-
-
-
-
-
-
-//создание попапа подтверждения удаления карточки
-
-// const popupSubmit = new PopupSubmit(popupSubmitSelector,  ()=> {
-//   // опишем фунцию сабмита
-//   //здесь будет сначала удаление с сервера
-
-//   // потом удаление из ДОМ
-
-//   // потом закрытие попапа
-
-//   popupSubmit.close()
-// }
-
-// submit: (data) => {
-//   api.deleteCard(data)
-//     .then(() => {
-//       tempCard.deleteCard();
-//     })
-//     .then(() => {
-//       tempCard = null;
-//       popupWithConfirm.close();
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     })
-
-// })

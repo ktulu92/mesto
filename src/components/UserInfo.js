@@ -6,7 +6,7 @@ export default class UserInfo{
         this._profileTitle = document.querySelector(this._profileTitleSelector);
         this._profileSubtitle = document.querySelector(this._profileSubtitleSelector);
         this._profileAvatar = document.querySelector(this._profileAvatarSelector)
-         this.updateUserInfo()
+        //  this.updateUserInfo()
 
     }
 
@@ -36,9 +36,9 @@ setUserInfo(data){
 setUserAvatar (data){
     this._profileAvatar.src = data.avatar
 }
-updateUserInfo = ()=>{
+// updateUserInfo = ()=>{
     
-}
+// }
 
 
 }
