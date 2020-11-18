@@ -5,41 +5,30 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import { validationData } from "../components/utils.js";
-import { initialCards } from "../components/utils.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
 import PopupSubmit from "../components/PopupSubmit.js";
 
 const templateSelector = ".template-element";
-const addElementForm = document.querySelector(".pop-up__form_type_add-card");
-// const inputName = addElementForm.querySelector(".pop-up__input_type_name");
-// const inputLink = addElementForm.querySelector(
-//   ".pop-up__input_type_image-link"
-// );
+const profileSelector = ".pop-up-profile"; //Селектор попапа редактирования аватара
+const popupProfileOpenButton = document.querySelector(".profile__edit-button"); //Кнопка открытия попапа
 const editProfileForm = document.querySelector(
   ".pop-up__form_type_edit-profile"
 );
 const addCardForm = document.querySelector(".pop-up__form_type_add-card");
 const editAvatarForm = document.querySelector(".pop-up__form_type_edit-avatar");
-
-//создание попапа подтверждения
-const popupSumbitSelector = ".pop-up-confirm"
-const popupConfirm = new PopupSubmit(popupSumbitSelector,{
-  handleFormConfirm:(_id)=>{
-//здесь будет смена кнопки на "сохранение"
-  api.deleteCard(_id).then(()=>{
-    //здесь будет смена кнопки на значение по умолчанию "да"
-
-
-    
-  })
-  popupConfirm.close()
-  }}) 
-
-
-  popupConfirm.setEventListeners()
-
+const elementsList = document.querySelector(".elements");
+const name = document.querySelector(".pop-up__input_type_name"); //nameInput
+const info = document.querySelector(".pop-up__input_type_description"); //infoInput
+const avatar = document.querySelector(".pop-up__input_type_avatar-link"); //avatarInput
+const popupAddCardOpenButton = document.querySelector(".profile__add-button");
+const popupAddAvatarOpenButton = document.querySelector(
+  ".profile__edit-avatar"
+);
+const popupSumbitSelector = ".pop-up-confirm"; //создание попапа подтверждения
+const popupProfileSelector = ".pop-up__edit-avatar"; //Селектор попапа редактирования аватара
+const CardSelector = ".pop-up-place";
 
 //валидация
 const validatorProfile = new FormValidator(validationData, editProfileForm); //для попапа
@@ -49,40 +38,61 @@ const validatorAvatar = new FormValidator(validationData, editAvatarForm);
 validatorProfile.enableValidation();
 validatorPlace.enableValidation();
 validatorAvatar.enableValidation();
-
-const elementsList = document.querySelector(".elements");
-
 const api = new Api();
+
 
 let userId; //здесь айди пользователя
 api.getProfileInfo().then((data) => {
   userId = data._id;
-  console.log(userId);
 });
 
-//
-//а сейчас мы будем описывать  ваши ебучие колбеки
+const popupConfirm = new PopupSubmit(popupSumbitSelector);
 
+popupConfirm.setEventListeners();
 
-function handleLikeClick(){
- 
-  console.log("функция лайк")
-}
-function handleDeleteIconClick(_id){
-    popupConfirm.open(_id)
-  
-  // api.deleteCard(_id)
+const callbacks = {
+  //=======================================Функция открытия попапа галереи
+  handleCardClick: (image, text) => {
+    //эта функция работает стабильно
+    popupGallery.open(image, text);
+  },
+  //==========================================Лайки снимаются только после перезагрузки страницы
+  handleLikeClick: (card, element) => {
+    // card.isLiked()
+    if (card.isLiked()) {
+      api.dislikeCard(card._id).then((res) => {
+        card.setLikesInfo(res);
+      });
+    } else {
+      api.likeCard(card._id).then((res) => {
+        card.setLikesInfo(res);
+      });
+    }
+  },
+  //===========================================================================Функция удаления карточек
+  handleDeleteIconClick: (card, element) => {
+    popupConfirm.open(card._id);
 
-console.log("функция удаления")
-popupConfirm.open(_id)
+    function action() {
+      popupConfirm.editSubmitButton(true)
+      api
+        .deleteCard(card._id)
+        .then((res) => {
+          element.remove();
+          res.remove();
+        })
+        .catch((err) => console.log(err)).
+        finally(popupConfirm.editSubmitButton(false))
+      popupConfirm.close();
+    }
 
-}
+    popupConfirm.setSubmitAction(action);
+    
+  },
+};
 
-
- api.getInitialCards().then((data) => {
+api.getInitialCards().then((data) => {
   const initialCards = data.map((cards) => cards);
-
-
 
   const CardList = new Section(
     {
@@ -91,9 +101,8 @@ popupConfirm.open(_id)
         const card = new Card(
           element,
           templateSelector,
-          handleCardClick,
-          handleLikeClick,
-          handleDeleteIconClick,
+          callbacks,
+
           userId
         ).render();
 
@@ -108,10 +117,6 @@ popupConfirm.open(_id)
 
 //попап галереи
 const popupGallery = new PopupWithImage(".pop-up_type_image");
-popupGallery.setEventListeners();
-function handleCardClick(image, text) {
-  popupGallery.open(image, text);
-}
 
 //Создание попапа редактирования профиля
 const profileData = {
@@ -119,10 +124,6 @@ const profileData = {
   profileSubtitleSelector: ".profile__subtitle",
   profileAvatarSelector: ".profile__avatar",
 };
-
-const name = document.querySelector(".pop-up__input_type_name"); //nameInput
-const info = document.querySelector(".pop-up__input_type_description"); //infoInput
-const avatar = document.querySelector(".pop-up__input_type_avatar-link"); //avatarInput
 
 const profileInfo = new UserInfo(profileData);
 
@@ -133,8 +134,6 @@ api.getProfileInfo().then((data) => {
 });
 
 //Создание попапа редактирования профиля
-const profileSelector = ".pop-up-profile"; //Селектор попапа редактирования аватара
-const popupProfileOpenButton = document.querySelector(".profile__edit-button"); //Кнопка открытия попапа
 
 const popupProfile = new PopupWithForm(profileSelector, () => {
   //cоздание экземпляра класса попапа октрытия профиля
@@ -143,7 +142,6 @@ const popupProfile = new PopupWithForm(profileSelector, () => {
     //забрали данные пользователя с сервера
     profileInfo.setUserInfo(data);
   }); //обовляем данные в доме
-
   popupProfile.close(); //закрываем попап
 });
 
@@ -155,8 +153,8 @@ popupProfileOpenButton.addEventListener("click", () => {
   popupProfile.open(); //открытие попапа редактирования профиля
 });
 
-// Создание попапа редактирования аватара
-const popupProfileSelector = ".pop-up__edit-avatar"; //Селектор попапа редактирования аватара
+//========================================================================== Создание попапа редактирования аватара
+
 const popupAvatar = new PopupWithForm(popupProfileSelector, () => {
   api.updateUserAvatar(avatar.value).then((data) => {
     //забрали данные  с сервера и внесли данные пользователя в дом
@@ -165,42 +163,33 @@ const popupAvatar = new PopupWithForm(popupProfileSelector, () => {
   popupAvatar.close(); //закрыли попап
 });
 
-popupAvatar.setEventListeners();
+//==========================================================================Создание попапа добавления карточки
 
-const popupAddAvatarOpenButton = document.querySelector(
-  ".profile__edit-avatar"
-);
+const popupAddCard = new PopupWithForm(CardSelector, (element) => {
+  api.addNewCard(element).then((element) => {
+    const card = new Card(
+      element,
+      templateSelector,
+      callbacks,
+      userId
+    ).render();
+    elementsList.prepend(card);
+    popupAddCard.close();
+  });
+});
+
+popupAddCardOpenButton.addEventListener("click", () => {
+  popupAddCard.open();
+});
+
 popupAddAvatarOpenButton.addEventListener("click", () => {
   avatar.value = profileInfo.getUserInfo().avatarData;
   popupAvatar.open();
 });
 
-//Создание попапа добавления карточки
-const CardSelector = ".pop-up-place";
-const popupAddCard = new PopupWithForm(CardSelector, (data) => {
-  api.addNewCard(data);
-  // .then((data)=> data);
-
-  //добавление карты
- 
-  const card = new Card(
-    data,
-    templateSelector,
-    handleCardClick,
-    handleLikeClick,
-    handleDeleteIconClick,    
-    userId
-  )
-  
-  elementsList.prepend(card.render());
-  popupAddCard.close();
-});
-
-
-
-
+//навешиваем слушателей
 popupAddCard.setEventListeners();
-const popupAddCardOpenButton = document.querySelector(".profile__add-button");
-popupAddCardOpenButton.addEventListener("click", () => {
-  popupAddCard.open();
-});
+popupAvatar.setEventListeners();
+popupGallery.setEventListeners();
+
+

@@ -74,7 +74,7 @@ class Api {
 
   likeCard(cardId) {
     return fetch(
-      `https://mesto.nomoreparties.co/v1/cohort-17/cards/${cardId}`,
+      `https://mesto.nomoreparties.co/v1/cohort-17/cards/likes/${cardId}`,
       {
         method: "PUT",
 
@@ -99,7 +99,7 @@ class Api {
 
   dislikeCard(cardId) {
     return fetch(
-      `https://mesto.nomoreparties.co/v1/cohort-17/cards/${cardId}`,
+      `https://mesto.nomoreparties.co/v1/cohort-17/cards/likes/${cardId}`,
       {
         method: "DELETE",
 

@@ -32,6 +32,29 @@ class Popup {
         this.close();
       });
   }
+
+
+
+
+
+
+
+
+
+
+//   setButtonLoadingText(buttonSelector,loading,text){
+//   const defaultButtonText = this.button.name ;
+ 
+//   if(loading){
+//     this._popup.document.querySelector(buttonSelector).name = text
+//   }
+//  else {
+//   this.button.name = defaultButtonText
+//  }
+//   }
+
+
+
 }
 
 export default Popup;
