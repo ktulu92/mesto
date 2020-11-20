@@ -3,13 +3,14 @@ class Api {
     this.url = url;
     this.headers = headers;
   }
+ 
+  
 
   //ЭТОТ МЕТОД РАБОТАЕТ
   getInitialCards() {
-    return fetch("https://mesto.nomoreparties.co/v1/cohort-17/cards", {
-      headers: {
-        authorization: "c9722db9-3ef8-471a-a8fd-61097de987b4",
-      },
+    console.log(`${this.url}`+"cards")
+    return fetch(`${this.url}`+"cards", {
+      headers: this.headers,
     }).then((res) => {
       if (res.ok) {
         return res.json();
@@ -17,18 +18,21 @@ class Api {
 
       // если ошибка, отклоняем промис
       return Promise.reject(`Ошибка: ${res.status}`);
+    })
+    .catch((err) => {
+      console.log("Запрос не выполнен", err);
     });
   }
 
   //ЭТОТМЕТОД РАБОТАЕТ
   addNewCard({ name, link }) {
-    return fetch("https://mesto.nomoreparties.co/v1/cohort-17/cards", {
+    
+    return fetch(`${this.url}`+"cards", {
       method: "POST",
+      
 
-      headers: {
-        authorization: "c9722db9-3ef8-471a-a8fd-61097de987b4",
-        "Content-Type": "application/json",
-      },
+      headers: this.headers
+      ,
       body: JSON.stringify({
         name: name,
         link: link,
@@ -49,14 +53,12 @@ class Api {
 
   deleteCard(cardId) {
     return fetch(
-      `https://mesto.nomoreparties.co/v1/cohort-17/cards/${cardId}`,
+     
+      `${this.url}+"cards/"+${cardId}`,
       {
         method: "DELETE",
 
-        headers: {
-          authorization: "c9722db9-3ef8-471a-a8fd-61097de987b4",
-          "Content-Type": "application/json",
-        },
+        headers: this.headers,
       }
     )
       .then((res) => {
@@ -74,14 +76,12 @@ class Api {
 
   likeCard(cardId) {
     return fetch(
-      `https://mesto.nomoreparties.co/v1/cohort-17/cards/likes/${cardId}`,
+      
+      `${this.url}`+ "cards/likes/" + `${cardId}`,
       {
         method: "PUT",
 
-        headers: {
-          authorization: "c9722db9-3ef8-471a-a8fd-61097de987b4",
-          "Content-Type": "application/json",
-        },
+        headers: this.headers,
       }
     )
       .then((res) => {
@@ -99,14 +99,11 @@ class Api {
 
   dislikeCard(cardId) {
     return fetch(
-      `https://mesto.nomoreparties.co/v1/cohort-17/cards/likes/${cardId}`,
+      `${this.url}`+"cards/likes/"+ `${cardId}`,
       {
         method: "DELETE",
 
-        headers: {
-          authorization: "c9722db9-3ef8-471a-a8fd-61097de987b4",
-          "Content-Type": "application/json",
-        },
+        headers: this.headers,
       }
     )
       .then((res) => {
@@ -124,13 +121,10 @@ class Api {
 
   updateUserAvatar(url) {
     return fetch(
-      "https://mesto.nomoreparties.co/v1/cohort-17/users/me/avatar",
+      `${this.url}` +"users/me/avatar",
       {
         method: "PATCH",
-        headers: {
-          authorization: "c9722db9-3ef8-471a-a8fd-61097de987b4",
-          "Content-Type": "application/json",
-        },
+        headers: this.headers,
         body: JSON.stringify({
           avatar: url,
         }),
@@ -141,15 +135,16 @@ class Api {
       }
 
       return Promise.reject(`Ошибка: ${res.status}`);
+    })
+    .catch((err) => {
+      console.log("Запрос не выполнен", err);
     });
   }
 
   getProfileInfo() {
-    return fetch("https://mesto.nomoreparties.co/v1/cohort-17/users/me", {
+    return fetch(`${this.url}` + "users/me", {
       method: "GET",
-      headers: {
-        authorization: "c9722db9-3ef8-471a-a8fd-61097de987b4",
-      },
+      headers: this.headers,
     }).then((res) => {
       if (res.ok) {
         return res.json();
@@ -157,20 +152,23 @@ class Api {
 
       // если ошибка, отклоняем промис
       return Promise.reject(`Ошибка: ${res.status}`);
+    })
+    .catch((err) => {
+      console.log("Запрос не выполнен", err);
     });
   }
 
   editProfile(name, about) {
-    return fetch("https://mesto.nomoreparties.co/v1/cohort-17/users/me", {
+    return fetch(`${this.url}` + "users/me", {
       method: "PATCH",
-      headers: {
-        authorization: "c9722db9-3ef8-471a-a8fd-61097de987b4",
-        "Content-Type": "application/json",
-      },
+      headers: this.headers,
       body: JSON.stringify({
         name: name,
         about: about,
       }),
+    })
+    .catch((err) => {
+      console.log("Запрос не выполнен", err);
     });
   }
 }

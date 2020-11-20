@@ -38,12 +38,31 @@ const validatorAvatar = new FormValidator(validationData, editAvatarForm);
 validatorProfile.enableValidation();
 validatorPlace.enableValidation();
 validatorAvatar.enableValidation();
-const api = new Api();
+
+const urlData = "https://mesto.nomoreparties.co/v1/cohort-17/"
+const headersData ={
+  authorization: "c9722db9-3ef8-471a-a8fd-61097de987b4",
+        "Content-Type": "application/json"}
+
+const api = new Api(urlData,headersData);
+
+const profileData = {
+  profileTitleSelector: ".profile__title",
+  profileSubtitleSelector: ".profile__subtitle",
+  profileAvatarSelector: ".profile__avatar",
+};
+
+const profileInfo = new UserInfo(profileData);
+
+
+
 
 
 let userId; //здесь айди пользователя
 api.getProfileInfo().then((data) => {
   userId = data._id;
+  profileInfo.setUserInfo(data); //добавили данные пользователя  с сервера в дом
+profileInfo.setUserAvatar(data); //добавили аватар пользователя с сервера в дом
 });
 
 const popupConfirm = new PopupSubmit(popupSumbitSelector);
@@ -74,27 +93,26 @@ const callbacks = {
     popupConfirm.open(card._id);
 
     function action() {
-      popupConfirm.editSubmitButton(true)
+      popupConfirm.editSubmitButton(true);
       api
         .deleteCard(card._id)
         .then((res) => {
           element.remove();
           res.remove();
         })
-        .catch((err) => console.log(err)).
-        finally(popupConfirm.editSubmitButton(false))
+        .catch((err) => console.log(err))
+        .finally(popupConfirm.editSubmitButton(false));
       popupConfirm.close();
     }
 
     popupConfirm.setSubmitAction(action);
-    
   },
 };
 
 api.getInitialCards().then((data) => {
   const initialCards = data.map((cards) => cards);
 
-  const CardList = new Section(
+  const cardList = new Section(
     {
       items: initialCards,
       renderer: (element) => {
@@ -106,42 +124,39 @@ api.getInitialCards().then((data) => {
           userId
         ).render();
 
-        CardList.addItem(card);
+        cardList.addItem(card);
       },
     },
     ".elements"
   );
 
-  CardList.rendererItems();
+  cardList.rendererItems();
 });
 
 //попап галереи
 const popupGallery = new PopupWithImage(".pop-up_type_image");
 
 //Создание попапа редактирования профиля
-const profileData = {
-  profileTitleSelector: ".profile__title",
-  profileSubtitleSelector: ".profile__subtitle",
-  profileAvatarSelector: ".profile__avatar",
-};
 
-const profileInfo = new UserInfo(profileData);
 
-api.getProfileInfo().then((data) => {
-  //забрали данные пользователя с сервера
-  profileInfo.setUserInfo(data); //добавили данные пользователя  с сервера в дом
-  profileInfo.setUserAvatar(data); //добавили аватар пользователя с сервера в дом
-});
+
+// api.getProfileInfo().then((data) => {
+//   //забрали данные пользователя с сервера
+ 
+// });
 
 //Создание попапа редактирования профиля
 
 const popupProfile = new PopupWithForm(profileSelector, () => {
   //cоздание экземпляра класса попапа октрытия профиля
-  api.editProfile(name.value, info.value); //меняем данные на сервере.
+  api.editProfile(name.value, info.value).then(()=>{
+    //меняем данные на сервере.
   api.getProfileInfo().then((data) => {
     //забрали данные пользователя с сервера
     profileInfo.setUserInfo(data);
-  }); //обовляем данные в доме
+  });
+
+  })  //обовляем данные в доме
   popupProfile.close(); //закрываем попап
 });
 
@@ -191,5 +206,3 @@ popupAddAvatarOpenButton.addEventListener("click", () => {
 popupAddCard.setEventListeners();
 popupAvatar.setEventListeners();
 popupGallery.setEventListeners();
-
-
