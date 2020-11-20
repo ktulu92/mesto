@@ -54,7 +54,7 @@ class Api {
   deleteCard(cardId) {
     return fetch(
      
-      `${this.url}+"cards/"+${cardId}`,
+      `${this.url}`+"cards/"+`${cardId}`,
       {
         method: "DELETE",
 
