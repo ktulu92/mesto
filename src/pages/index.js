@@ -39,12 +39,13 @@ validatorProfile.enableValidation();
 validatorPlace.enableValidation();
 validatorAvatar.enableValidation();
 
-const urlData = "https://mesto.nomoreparties.co/v1/cohort-17/"
-const headersData ={
+const urlData = "https://mesto.nomoreparties.co/v1/cohort-17/";
+const headersData = {
   authorization: "c9722db9-3ef8-471a-a8fd-61097de987b4",
-        "Content-Type": "application/json"}
+  "Content-Type": "application/json",
+};
 
-const api = new Api(urlData,headersData);
+const api = new Api(urlData, headersData);
 
 const profileData = {
   profileTitleSelector: ".profile__title",
@@ -54,15 +55,11 @@ const profileData = {
 
 const profileInfo = new UserInfo(profileData);
 
-
-
-
-
 let userId; //здесь айди пользователя
 api.getProfileInfo().then((data) => {
   userId = data._id;
   profileInfo.setUserInfo(data); //добавили данные пользователя  с сервера в дом
-profileInfo.setUserAvatar(data); //добавили аватар пользователя с сервера в дом
+  profileInfo.setUserAvatar(data); //добавили аватар пользователя с сервера в дом
 });
 
 const popupConfirm = new PopupSubmit(popupSumbitSelector);
@@ -138,27 +135,40 @@ const popupGallery = new PopupWithImage(".pop-up_type_image");
 
 //Создание попапа редактирования профиля
 
-
-
 // api.getProfileInfo().then((data) => {
 //   //забрали данные пользователя с сервера
- 
+
 // });
 
 //Создание попапа редактирования профиля
 
+//cоздание экземпляра класса попапа октрытия профиля
 const popupProfile = new PopupWithForm(profileSelector, () => {
-  //cоздание экземпляра класса попапа октрытия профиля
-  api.editProfile(name.value, info.value).then(()=>{
-    //меняем данные на сервере.
+  
   api.getProfileInfo().then((data) => {
     //забрали данные пользователя с сервера
     profileInfo.setUserInfo(data);
-  });
-
-  })  //обовляем данные в доме
+  }); //обовляем данные в доме
+  api.editProfile(name.value, info.value);
   popupProfile.close(); //закрываем попап
 });
+
+
+
+
+
+
+// const popupProfile = new PopupWithForm(profileSelector, () => {
+//   api.editProfile(name.value, info.value);
+//   api.getProfileInfo().then((data) => {
+//     //забрали данные пользователя с сервера
+//     profileInfo.setUserInfo(data);
+//   }); //обовляем данные в доме
+//   popupProfile.close(); //закрываем попап
+// });
+
+
+
 
 popupProfile.setEventListeners(); //вешаем бработчики событий
 popupProfileOpenButton.addEventListener("click", () => {
