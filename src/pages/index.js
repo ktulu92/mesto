@@ -135,10 +135,8 @@ const popupGallery = new PopupWithImage(".pop-up_type_image");
 
 //Создание попапа редактирования профиля
 
-// api.getProfileInfo().then((data) => {
-//   //забрали данные пользователя с сервера
 
-// });
+
 
 //Создание попапа редактирования профиля
 
@@ -150,24 +148,13 @@ const popupProfile = new PopupWithForm(profileSelector, () => {
     .then((res)=>{
       profileInfo.setUserInfo(res);
     }) 
-   
-
-  popupProfile.close(); //закрываем попап
+     popupProfile.close(); //закрываем попап
 });
 
 
 
 
 
-
-// const popupProfile = new PopupWithForm(profileSelector, () => {
-//   api.editProfile(name.value, info.value);
-//   api.getProfileInfo().then((data) => {
-//     //забрали данные пользователя с сервера
-//     profileInfo.setUserInfo(data);
-//   }); //обовляем данные в доме
-//   popupProfile.close(); //закрываем попап
-// });
 
 
 
