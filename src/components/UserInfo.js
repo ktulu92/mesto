@@ -14,8 +14,7 @@ getUserInfo(){
     this._userData = {    
         nameData: this._profileTitle.textContent,
         infoData: this._profileSubtitle.textContent,
-        avatarData: this._profileAvatar.src
-      
+        avatarData: this._profileAvatar.src     
 
     }
     return  this._userData

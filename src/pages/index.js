@@ -143,13 +143,15 @@ const popupGallery = new PopupWithImage(".pop-up_type_image");
 //Создание попапа редактирования профиля
 
 //cоздание экземпляра класса попапа октрытия профиля
-const popupProfile = new PopupWithForm(profileSelector, () => {
-  
-  api.getProfileInfo().then((data) => {
-    //забрали данные пользователя с сервера
-    profileInfo.setUserInfo(data);
-  }); //обовляем данные в доме
-  api.editProfile(name.value, info.value);
+const popupProfile = new PopupWithForm(profileSelector, () => {  
+ 
+  api.editProfile(name.value, info.value).then((res)=>{   
+    return res.json()})
+    .then((res)=>{
+      profileInfo.setUserInfo(res);
+    }) 
+   
+
   popupProfile.close(); //закрываем попап
 });
 
@@ -174,6 +176,7 @@ popupProfile.setEventListeners(); //вешаем бработчики событ
 popupProfileOpenButton.addEventListener("click", () => {
   name.value = profileInfo.getUserInfo().nameData; //заполняем инпут имени пользователя текущим значение дом-элемента
   info.value = profileInfo.getUserInfo().infoData; //заполняем инпут информации о  пользователе текущим значение дом-элемента
+  
 
   popupProfile.open(); //открытие попапа редактирования профиля
 });
