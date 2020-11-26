@@ -68,7 +68,7 @@ class Card {
     this._likeButton = this._newCard.querySelector(".element__like-button");
     // this._countLikes =this._newCard.querySelector(".element__like-count");
     this._cardImage.src = this._image;
-    this._cardImage.alt = this._image;
+    this._cardImage.alt = this._text;
     this._cardTitle.textContent = this._text;
 
     if (this.isLiked) {
