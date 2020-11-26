@@ -18,5 +18,5 @@
 
 
 **Как посмотреть?**
-Проект доступен по ссылке: https://ktulu92.github.io/mesto/index.html
+Проект доступен по ссылке: https://ktulu92.github.io/mesto/
 
